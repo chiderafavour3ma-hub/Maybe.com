@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ÁJÉ — Modern Nigerian Kitchen | Taste the Moment | Lagos</title>
+<meta name="description" content="ÁJÉ is Lagos' most luxurious modern Nigerian kitchen. Smoky jollof, peppered snail, suya, egusi — elevated. Taste the Moment."/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink: '#0E0B08',
+        coal: '#16110C',
+        espresso: '#211712',
+        bark: '#3D2314',
+        cream: '#FAF6EF',
+        ivory: '#F3EAD9',
+        sand: '#E9DCC6',
+        gold: '#C99A5B',
+        caramel: '#D4A574',
+        ember: '#B4552D',
+        leaf: '#2E3A2B'
+      },
+      fontFamily: {
+        serif: ['"Playfair Display"', 'serif'],
+        cormorant: ['"Cormorant Garamond"', 'serif'],
+        sans: ['Manrope', 'sans-serif'],
+        script: ['"Great Vibes"', 'cursive']
+      }
+    }
+  }
+}
+</script>
+<style>
+*{ -webkit-tap-highlight-color: transparent; }
+html{ scroll-behavior:smooth; }
+body{ background:#0E0B08; color:#FAF6EF; font-family:'Manrope',sans-serif; overflow-x:hidden; }
+::selection{ background:#C99A5B; color:#0E0B08; }
+::-webkit-scrollbar{ width:10px; }
+::-webkit-scrollbar-track{ background:#0E0B08; }
+::-webkit-scrollbar-thumb{ background:linear-gradient(#C99A5B,#7A5A2E); border-radius:10px; }
+
+/* Grain */
+.grain{ position:fixed; inset:0; z-index:5; pointer-events:none; opacity:.07; mix-blend-mode:overlay;
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* Preloader */
+#preloader{ position:fixed; inset:0; z-index:200; background:#0E0B08; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity .8s ease, visibility .8s; }
+#preloader.done{ opacity:0; visibility:hidden; }
+.loader-line{ width:220px; height:1px; background:rgba(201,154,91,.2); position:relative; overflow:hidden; margin-top:24px; }
+.loader-bar{ position:absolute; left:0; top:0; height:100%; width:0%; background:linear-gradient(90deg,#C99A5B,#F3EAD9); }
+.loader-pct{ font-size:11px; letter-spacing:.4em; color:#C99A5B; margin-top:14px; }
+
+/* Nav */
+#nav{ position:fixed; top:0; left:0; right:0; z-index:100; transition:all .5s cubic-bezier(.4,0,.2,1); padding:22px 0; }
+#nav.scrolled{ background:rgba(14,11,8,.82); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); padding:12px 0; border-bottom:1px solid rgba(201,154,91,.14); box-shadow:0 10px 40px rgba(0,0,0,.45); }
+.nav-link{ position:relative; font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; font-weight:600; color:rgba(250,246,239,.78); transition:color .3s; padding:6px 2px; }
+.nav-link::after{ content:''; position:absolute; left:0; bottom:0; height:1px; width:0; background:#C99A5B; transition:width .4s cubic-bezier(.4,0,.2,1); }
+.nav-link:hover{ color:#FAF6EF; }
+.nav-link:hover::after{ width:100%; }
+.nav-link.active{ color:#C99A5B; }
+.nav-link.active::after{ width:100%; }
+
+/* Mobile menu */
+#mobileMenu{ position:fixed; inset:0; z-index:95; background:radial-gradient(1200px 600px at 80% -10%, rgba(201,154,91,.18), transparent), #0E0B08; transform:translateY(-100%); transition:transform .7s cubic-bezier(.76,0,.24,1); display:flex; flex-direction:column; justify-content:center; padding:100px 32px 40px; }
+#mobileMenu.open{ transform:translateY(0); }
+.m-link{ font-family:'Playfair Display',serif; font-size:clamp(32px,8vw,54px); line-height:1.15; color:#FAF6EF; display:flex; align-items:baseline; gap:16px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.07); opacity:0; transform:translateY(30px); transition:all .6s ease; }
+#mobileMenu.open .m-link{ opacity:1; transform:translateY(0); }
+.m-link span.num{ font-family:'Manrope'; font-size:12px; color:#C99A5B; letter-spacing:.2em; }
+.m-link.active{ color:#C99A5B; font-style:italic; }
+.burger{ width:44px; height:44px; border:1px solid rgba(201,154,91,.35); border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; transition:.4s; }
+.burger span{ display:block; width:20px; height:1.5px; background:#FAF6EF; transition:.45s cubic-bezier(.4,0,.2,1); }
+.burger.open span:nth-child(1){ transform:translateY(7.5px) rotate(45deg); background:#C99A5B; }
+.burger.open span:nth-child(2){ opacity:0; transform:scaleX(0); }
+.burger.open span:nth-child(3){ transform:translateY(-7.5px) rotate(-45deg); background:#C99A5B; }
+
+/* Buttons */
+.btn-gold{ position:relative; display:inline-flex; align-items:center; justify-content:center; gap:12px; background:linear-gradient(135deg,#E2B978 0%,#C99A5B 45%,#9A6F33 100%); color:#0E0B08; font-weight:800; font-size:13px; letter-spacing:.18em; text-transform:uppercase; padding:18px 38px; border-radius:100px; overflow:hidden; transition:transform .35s, box-shadow .35s; box-shadow:0 12px 35px rgba(201,154,91,.35); isolation:isolate; }
+.btn-gold::before{ content:''; position:absolute; inset:0; background:linear-gradient(135deg,#fff3d6,#C99A5B); opacity:0; transition:.4s; z-index:-1; }
+.btn-gold:hover{ transform:translateY(-3px) scale(1.02); box-shadow:0 20px 50px rgba(201,154,91,.5); }
+.btn-gold:hover::before{ opacity:1; }
+.btn-gold::after{ content:''; position:absolute; top:0; left:-80%; width:50%; height:100%; background:linear-gradient(105deg,transparent,rgba(255,255,255,.6),transparent); transform:skewX(-20deg); animation:shine 3.5s infinite; }
+@keyframes shine{ 0%{left:-80%} 60%{left:130%} 100%{left:130%} }
+.btn-outline{ display:inline-flex; align-items:center; justify-content:center; gap:12px; border:1px solid rgba(250,246,239,.28); color:#FAF6EF; font-weight:700; font-size:13px; letter-spacing:.18em; text-transform:uppercase; padding:17px 36px; border-radius:100px; backdrop-filter:blur(10px); transition:.4s; background:rgba(255,255,255,.04); }
+.btn-outline:hover{ border-color:#C99A5B; color:#C99A5B; background:rgba(201,154,91,.08); transform:translateY(-3px); }
+.btn-dark{ display:inline-flex; align-items:center; gap:10px; background:#0E0B08; color:#FAF6EF; font-weight:700; font-size:12px; letter-spacing:.16em; text-transform:uppercase; padding:15px 28px; border-radius:100px; transition:.35s; }
+.btn-dark:hover{ background:#C99A5B; color:#0E0B08; transform:translateY(-2px); box-shadow:0 12px 30px rgba(0,0,0,.25); }
+
+/* Hero */
+.hero-img{ animation:kenburns 22s ease-in-out infinite alternate; will-change:transform; }
+@keyframes kenburns{ 0%{ transform:scale(1) translate(0,0);} 50%{ transform:scale(1.12) translate(-1.5%, -1.5%);} 100%{ transform:scale(1.06) translate(1.5%, 1%);} }
+.hero-vignette{ background:radial-gradient(ellipse at center, transparent 20%, rgba(14,11,8,.55) 65%, rgba(14,11,8,.95) 100%), linear-gradient(to bottom, rgba(14,11,8,.65) 0%, rgba(14,11,8,.25) 35%, rgba(14,11,8,.35) 65%, #0E0B08 100%); }
+.reveal-line{ overflow:hidden; display:block; }
+.reveal-line > span{ display:block; transform:translateY(110%); animation:riseUp 1.2s cubic-bezier(.19,1,.22,1) forwards; }
+@keyframes riseUp{ to{ transform:translateY(0);} }
+.float-particle{ position:absolute; border-radius:50%; background:radial-gradient(circle, rgba(226,185,120,.9), transparent 70%); animation:floatUp linear infinite; pointer-events:none; }
+@keyframes floatUp{ 0%{ transform:translateY(0) scale(1); opacity:0;} 15%{opacity:.8;} 85%{opacity:.4;} 100%{ transform:translateY(-90vh) scale(.5); opacity:0;} }
+.scroll-hint{ width:1px; height:70px; background:linear-gradient(#C99A5B,transparent); position:relative; overflow:hidden; }
+.scroll-hint::after{ content:''; position:absolute; top:-30%; left:0; width:100%; height:30%; background:#fff; animation:scrollDrop 2s infinite; }
+@keyframes scrollDrop{ to{ top:120%; } }
+
+/* Section labels */
+.eyebrow{ display:inline-flex; align-items:center; gap:12px; font-size:11px; letter-spacing:.42em; text-transform:uppercase; color:#C99A5B; font-weight:700; }
+.eyebrow::before{ content:''; width:42px; height:1px; background:#C99A5B; display:inline-block; }
+.eyebrow.center::after{ content:''; width:42px; height:1px; background:#C99A5B; display:inline-block; }
+
+/* Cards */
+.dish-card{ background:linear-gradient(180deg,#1C1510 0%,#14100B 100%); border:1px solid rgba(201,154,91,.14); border-radius:22px; overflow:hidden; transition:transform .6s cubic-bezier(.19,1,.22,1), box-shadow .6s, border-color .6s; }
+.dish-card:hover{ transform:translateY(-12px); box-shadow:0 30px 70px rgba(0,0,0,.55), 0 0 0 1px rgba(201,154,91,.35); border-color:rgba(201,154,91,.4); }
+.dish-card .img-wrap{ overflow:hidden; position:relative; }
+.dish-card .img-wrap img{ transition:transform 1.2s cubic-bezier(.19,1,.22,1); }
+.dish-card:hover .img-wrap img{ transform:scale(1.12) rotate(.5deg); }
+.price-badge{ background:rgba(14,11,8,.75); backdrop-filter:blur(12px); border:1px solid rgba(201,154,91,.35); color:#E2B978; font-weight:800; letter-spacing:.05em; }
+
+/* Reveal on scroll */
+[data-reveal]{ opacity:0; transform:translateY(50px); transition:opacity 1s cubic-bezier(.19,1,.22,1), transform 1s cubic-bezier(.19,1,.22,1); will-change:opacity,transform; }
+[data-reveal].in{ opacity:1; transform:translateY(0); }
+[data-reveal="left"]{ transform:translateX(-60px); }
+[data-reveal="right"]{ transform:translateX(60px); }
+[data-reveal="left"].in, [data-reveal="right"].in{ transform:translateX(0); }
+[data-reveal="scale"]{ transform:scale(.92) translateY(30px); }
+[data-reveal="scale"].in{ transform:scale(1) translateY(0); }
+
+/* Marquee */
+.marquee{ overflow:hidden; white-space:nowrap; border-top:1px solid rgba(201,154,91,.18); border-bottom:1px solid rgba(201,154,91,.18); }
+.marquee-track{ display:inline-flex; gap:0; animation:marquee 32s linear infinite; }
+.marquee:hover .marquee-track{ animation-play-state:paused; }
+@keyframes marquee{ to{ transform:translateX(-50%);} }
+
+/* Menu tabs */
+.tab-btn{ font-size:12px; letter-spacing:.2em; text-transform:uppercase; font-weight:700; padding:13px 26px; border-radius:100px; border:1px solid rgba(250,246,239,.14); color:rgba(250,246,239,.6); transition:.4s; white-space:nowrap; }
+.tab-btn:hover{ border-color:#C99A5B; color:#C99A5B; }
+.tab-btn.active{ background:linear-gradient(135deg,#E2B978,#C99A5B); color:#0E0B08; border-color:transparent; box-shadow:0 10px 30px rgba(201,154,91,.35); }
+
+/* Immersive */
+.step-dot{ width:44px; height:44px; border-radius:50%; border:1px solid rgba(201,154,91,.3); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; color:#C99A5B; transition:.5s; flex-shrink:0; }
+.exp-step{ opacity:.35; transition:.6s; border-left:1px solid rgba(201,154,91,.15); }
+.exp-step.active{ opacity:1; border-left-color:#C99A5B; background:linear-gradient(90deg,rgba(201,154,91,.08),transparent); }
+.exp-step.active .step-dot{ background:#C99A5B; color:#0E0B08; box-shadow:0 0 30px rgba(201,154,91,.5); }
+.exp-img{ position:absolute; inset:0; opacity:0; transform:scale(1.08); transition:opacity 1s ease, transform 1.4s ease; }
+.exp-img.active{ opacity:1; transform:scale(1); }
+
+/* Testimonials */
+.testi-slide{ position:absolute; inset:0; opacity:0; transform:translateY(30px) scale(.98); transition:all .8s cubic-bezier(.19,1,.22,1); pointer-events:none; }
+.testi-slide.active{ opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+.testi-dot{ width:32px; height:3px; border-radius:10px; background:rgba(255,255,255,.15); transition:.4s; cursor:pointer; }
+.testi-dot.active{ background:#C99A5B; width:56px; }
+
+/* Gallery */
+.g-item{ overflow:hidden; border-radius:18px; position:relative; cursor:pointer; }
+.g-item img{ transition:transform 1.1s cubic-bezier(.19,1,.22,1), filter .6s; }
+.g-item:hover img{ transform:scale(1.1); }
+.g-item .g-overlay{ position:absolute; inset:0; background:linear-gradient(to top, rgba(14,11,8,.85), transparent 60%); opacity:0; transition:.5s; display:flex; align-items:flex-end; padding:22px; }
+.g-item:hover .g-overlay{ opacity:1; }
+
+/* Pages */
+.page{ display:none; }
+.page.active{ display:block; animation:pageIn .9s cubic-bezier(.19,1,.22,1); }
+@keyframes pageIn{ from{ opacity:0; transform:translateY(24px);} to{ opacity:1; transform:translateY(0);} }
+
+/* FAB */
+#fabMain{ width:62px; height:62px; border-radius:50%; background:linear-gradient(135deg,#E2B978,#9A6F33); display:flex; align-items:center; justify-content:center; color:#0E0B08; font-size:22px; box-shadow:0 15px 40px rgba(201,154,91,.5); transition:.4s; cursor:pointer; }
+#fabMain:hover{ transform:scale(1.08) rotate(8deg); }
+.fab-opt{ width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; transform:scale(0) translateY(10px); opacity:0; transition:.45s cubic-bezier(.34,1.56,.64,1); cursor:pointer; box-shadow:0 10px 25px rgba(0,0,0,.4); }
+#fabWrap.open .fab-opt{ transform:scale(1) translateY(0); opacity:1; }
+#fabWrap.open #fabMain i{ transform:rotate(45deg); }
+#fabMain i{ transition:.4s; }
+.fab-label{ position:absolute; right:64px; top:50%; transform:translateY(-50%); background:#0E0B08; border:1px solid rgba(201,154,91,.3); color:#FAF6EF; font-size:11px; font-weight:700; letter-spacing:.1em; padding:7px 14px; border-radius:100px; white-space:nowrap; opacity:0; pointer-events:none; transition:.3s; }
+.fab-opt:hover .fab-label{ opacity:1; }
+
+/* Cart drawer */
+#cartDrawer{ position:fixed; top:0; right:0; bottom:0; width:100%; max-width:440px; background:#14100B; z-index:130; transform:translateX(110%); transition:transform .6s cubic-bezier(.76,0,.24,1); border-left:1px solid rgba(201,154,91,.2); display:flex; flex-direction:column; }
+#cartDrawer.open{ transform:translateX(0); }
+#overlay{ position:fixed; inset:0; background:rgba(0,0,0,.65); backdrop-filter:blur(4px); z-index:120; opacity:0; visibility:hidden; transition:.4s; }
+#overlay.show{ opacity:1; visibility:visible; }
+
+/* Lightbox */
+#lightbox{ position:fixed; inset:0; z-index:140; background:rgba(8,6,4,.94); backdrop-filter:blur(12px); display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; visibility:hidden; transition:.5s; }
+#lightbox.show{ opacity:1; visibility:visible; }
+#lightbox img{ max-width:90vw; max-height:82vh; border-radius:20px; box-shadow:0 40px 100px rgba(0,0,0,.7); border:1px solid rgba(201,154,91,.25); }
+
+/* Modal */
+.modal{ position:fixed; inset:0; z-index:150; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; visibility:hidden; transition:.5s; }
+.modal.show{ opacity:1; visibility:visible; }
+.modal-box{ background:linear-gradient(180deg,#1E1610,#120D09); border:1px solid rgba(201,154,91,.25); border-radius:24px; max-width:520px; width:100%; padding:40px 36px; transform:translateY(30px) scale(.96); transition:.5s cubic-bezier(.19,1,.22,1); max-height:90vh; overflow-y:auto; }
+.modal.show .modal-box{ transform:translateY(0) scale(1); }
+
+/* Toast */
+#toastWrap{ position:fixed; bottom:110px; left:50%; transform:translateX(-50%); z-index:160; display:flex; flex-direction:column; gap:10px; align-items:center; }
+.toast{ background:rgba(20,16,11,.95); border:1px solid rgba(201,154,91,.4); color:#FAF6EF; padding:14px 26px; border-radius:100px; font-size:13px; font-weight:600; letter-spacing:.05em; display:flex; align-items:center; gap:10px; box-shadow:0 15px 40px rgba(0,0,0,.5); animation:toastIn .5s cubic-bezier(.34,1.56,.64,1); backdrop-filter:blur(10px); }
+@keyframes toastIn{ from{ transform:translateY(20px) scale(.9); opacity:0;} to{ transform:translateY(0) scale(1); opacity:1;} }
+
+/* Experience slider */
+.xp-slide{ position:absolute; inset:0; opacity:0; transition:opacity 1.2s ease; }
+.xp-slide.active{ opacity:1; }
+.xp-slide img{ transform:scale(1.12); transition:transform 7s ease; }
+.xp-slide.active img{ transform:scale(1); }
+
+/* Pricing */
+.price-card{ background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.1); border-radius:28px; transition:.6s cubic-bezier(.19,1,.22,1); }
+.price-card:hover{ transform:translateY(-10px); border-color:rgba(201,154,91,.5); box-shadow:0 30px 70px rgba(0,0,0,.5); }
+.price-card.featured{ background:linear-gradient(180deg,#241811 0%,#150E08 100%); border:1px solid rgba(201,154,91,.5); box-shadow:0 30px 80px rgba(201,154,91,.18); }
+
+/* Inputs */
+.lux-input{ width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:16px 20px; color:#FAF6EF; font-size:14px; outline:none; transition:.35s; }
+.lux-input:focus{ border-color:#C99A5B; background:rgba(201,154,91,.06); box-shadow:0 0 0 4px rgba(201,154,91,.12); }
+.lux-input::placeholder{ color:rgba(250,246,239,.35); }
+select.lux-input option{ background:#14100B; }
+
+/* FAQ */
+.faq-a{ max-height:0; overflow:hidden; transition:max-height .5s ease; }
+.faq-item.open .faq-a{ max-height:200px; }
+.faq-item.open .faq-icon{ transform:rotate(45deg); }
+.faq-icon{ transition:.4s; }
+
+/* Custom cursor glow */
+#cursorGlow{ position:fixed; width:500px; height:500px; border-radius:50%; background:radial-gradient(circle, rgba(201,154,91,.08), transparent 65%); pointer-events:none; z-index:4; transform:translate(-50%,-50%); display:none; }
+@media(min-width:1024px){ #cursorGlow{ display:block; } }
+
+/* Cart badge pulse */
+@keyframes pulse{ 0%,100%{ transform:scale(1);} 50%{ transform:scale(1.25);} }
+.badge-pulse{ animation:pulse .5s ease; }
+
+.headline-serif{ font-family:'Playfair Display',serif; }
+.divider-gold{ height:1px; background:linear-gradient(90deg,transparent,rgba(201,154,91,.5),transparent); }
+.img-frame{ border:1px solid rgba(201,154,91,.25); padding:10px; border-radius:24px; background:rgba(201,154,91,.04); }
+.text-stroke{ -webkit-text-stroke:1px rgba(201,154,91,.5); color:transparent; }
+@media(max-width:768px){ .btn-gold,.btn-outline{ padding:15px 28px; font-size:11.5px; } }
+</style>
+</head>
+<body class="antialiased">
+<div class="grain"></div>
+<div id="cursorGlow"></div>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="text-center">
+    <p class="text-[11px] tracking-[.5em] text-gold/70 font-semibold mb-3">LAGOS • EST. 2016</p>
+    <h1 class="headline-serif text-6xl md:text-7xl font-bold tracking-wide">Á<span class="text-gold italic">J</span>É</h1>
+    <p class="font-cormorant italic text-xl text-cream/60 mt-2 text-lg">Modern Nigerian Kitchen</p>
+    <div class="loader-line mx-auto"><div class="loader-bar" id="loaderBar"></div></div>
+    <div class="loader-pct" id="loaderPct">0%</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-10 flex items-center justify-between">
+    <a href="#" data-link="home" class="nav-go flex items-center gap-3 group">
+      <div class="w-11 h-11 rounded-full border border-gold/40 flex items-center justify-center bg-black/30 backdrop-blur group-hover:bg-gold group-hover:text-ink text-gold transition-all duration-500">
+        <span class="headline-serif font-bold text-xl">Á</span>
+      </div>
+      <div class="leading-none">
+        <span class="headline-serif font-bold text-2xl tracking-[.12em]">ÁJÉ</span>
+        <span class="block text-[9px] tracking-[.35em] text-gold/80 font-semibold mt-1">MODERN NIGERIAN KITCHEN</span>
+      </div>
+    </a>
+    <div class="hidden xl:flex items-center gap-7">
+      <a href="#" data-link="home" class="nav-go nav-link active">Home</a>
+      <a href="#" data-link="about" class="nav-go nav-link">About</a>
+      <a href="#" data-link="menu" class="nav-go nav-link">Menu</a>
+      <a href="#" data-link="experience" class="nav-go nav-link">Experience</a>
+      <a href="#" data-link="pricing" class="nav-go nav-link">Pricing</a>
+      <a href="#" data-link="gallery" class="nav-go nav-link">Gallery</a>
+      <a href="#" data-link="contact" class="nav-go nav-link">Contact</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <button onclick="openCart()" class="relative hidden sm:flex w-11 h-11 rounded-full border border-white/15 items-center justify-center hover:border-gold hover:text-gold transition-all">
+        <i class="fa-solid fa-bag-shopping text-[15px]"></i>
+        <span id="cartCount" class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-gold text-ink text-[10px] font-extrabold flex items-center justify-center">0</span>
+      </button>
+      <button onclick="openCart()" class="btn-gold !py-3 !px-6 hidden md:inline-flex">Order Now <i class="fa-solid fa-arrow-right text-xs"></i></button>
+      <button class="burger xl:hidden" id="burger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobileMenu">
+  <p class="text-[11px] tracking-[.4em] text-gold font-bold mb-6">MENU — ÁJÉ LAGOS</p>
+  <a href="#" data-link="home" class="nav-go m-link active" style="transition-delay:.1s"><span class="num">01</span> Home</a>
+  <a href="#" data-link="about" class="nav-go m-link" style="transition-delay:.15s"><span class="num">02</span> About</a>
+  <a href="#" data-link="menu" class="nav-go m-link" style="transition-delay:.2s"><span class="num">03</span> Menu</a>
+  <a href="#" data-link="experience" class="nav-go m-link" style="transition-delay:.25s"><span class="num">04</span> Experience</a>
+  <a href="#" data-link="pricing" class="nav-go m-link" style="transition-delay:.3s"><span class="num">05</span> Pricing</a>
+  <a href="#" data-link="gallery" class="nav-go m-link" style="transition-delay:.35s"><span class="num">06</span> Gallery</a>
+  <a href="#" data-link="contact" class="nav-go m-link" style="transition-delay:.4s"><span class="num">07</span> Contact</a>
+  <div class="flex gap-3 mt-8">
+    <button onclick="toggleMobile();openCart()" class="btn-gold flex-1">Order Now</button>
+    <a href="tel:+2348012345678" class="btn-outline flex-1 !px-4"><i class="fa-solid fa-phone"></i> Call</a>
+  </div>
+  <p class="text-cream/40 text-xs mt-6 tracking-widest">14 ADMIRALTY WAY, LEKKI • 9AM – 11PM DAILY</p>
+</div>
+
+<main>
+<!-- ================================================= HOME PAGE ================================================= -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <header class="relative min-h-screen flex items-end md:items-center overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=2000&auto=format&fit=crop" alt="Ember grilled suya" class="hero-img w-full h-full object-cover"/>
+      <div class="hero-vignette absolute inset-0"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-ink/80 via-transparent to-transparent"></div>
+    </div>
+    <div id="particles" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 w-full pt-32 pb-24 md:py-0">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-4 mb-6" data-hero="1">
+          <span class="flex items-center gap-2 text-[11px] tracking-[.35em] font-bold text-gold border border-gold/30 rounded-full px-5 py-2.5 bg-black/40 backdrop-blur-md">
+            <span class="w-2 h-2 rounded-full bg-gold animate-pulse"></span> LAGOS' MOST LOVED KITCHEN
+          </span>
+        </div>
+        <p class="font-script text-3xl md:text-4xl text-caramel mb-2" data-hero="2">fire, flavour & finesse</p>
+        <h1 class="headline-serif font-bold leading-[.95] text-[15vw] sm:text-7xl md:text-8xl lg:text-[7.5rem]">
+          <span class="reveal-line"><span style="animation-delay:.2s">Taste the</span></span>
+          <span class="reveal-line"><span style="animation-delay:.45s" class="italic font-medium text-transparent bg-clip-text bg-gradient-to-r from-[#F3EAD9] via-[#E2B978] to-[#C99A5B]">Moment.</span></span>
+        </h1>
+        <p class="mt-6 text-cream/75 text-base md:text-lg font-light leading-relaxed max-w-xl" data-hero="3">
+          Smoky party jollof. Peppered snail that melts. Suya kissed by real fire.
+          Nigerian soul food — <span class="text-gold font-semibold">reimagined as luxury.</span>
+        </p>
+        <div class="flex flex-wrap gap-4 mt-9" data-hero="4">
+          <button onclick="openCart()" class="btn-gold">Order Now <i class="fa-solid fa-fire text-xs"></i></button>
+          <a href="#" data-link="menu" class="nav-go btn-outline">Explore Menu <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        </div>
+        <div class="flex items-center gap-8 mt-12 text-sm" data-hero="5">
+          <div><p class="headline-serif text-3xl font-bold text-gold">4.9<span class="text-lg">★</span></p><p class="text-[11px] tracking-[.25em] text-cream/50 font-semibold mt-1">2,400+ REVIEWS</p></div>
+          <div class="w-px h-10 bg-white/15"></div>
+          <div><p class="headline-serif text-3xl font-bold">32<span class="text-gold text-xl">k+</span></p><p class="text-[11px] tracking-[.25em] text-cream/50 font-semibold mt-1">HAPPY GUESTS</p></div>
+          <div class="w-px h-10 bg-white/15 hidden sm:block"></div>
+          <div class="hidden sm:block"><p class="headline-serif text-3xl font-bold">25<span class="text-gold text-xl">min</span></p><p class="text-[11px] tracking-[.25em] text-cream/50 font-semibold mt-1">AVG. DELIVERY</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-3">
+      <span class="text-[10px] tracking-[.4em] text-cream/50 font-semibold">SCROLL TO SAVOUR</span>
+      <div class="scroll-hint"></div>
+    </div>
+    <div class="absolute bottom-8 right-8 z-10 hidden lg:flex items-center gap-4 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl px-5 py-4">
+      <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=200&auto=format&fit=crop" class="w-14 h-14 rounded-xl object-cover" alt="Jollof"/>
+      <div><p class="text-[10px] tracking-[.3em] text-gold font-bold">CHEF'S PICK TODAY</p><p class="headline-serif italic text-lg">Smoky Party Jollof — ₦7,500</p></div>
+      <button onclick="addToCart(5)" class="w-10 h-10 rounded-full bg-gold text-ink flex items-center justify-center hover:scale-110 transition"><i class="fa-solid fa-plus text-sm"></i></button>
+    </div>
+  </header>
+
+  <!-- MARQUEE -->
+  <div class="marquee bg-coal py-5">
+    <div class="marquee-track headline-serif italic text-xl md:text-2xl text-cream/70">
+      <span class="px-6">Smoky Party Jollof <span class="text-gold not-italic px-6">✦</span> Peppered Snail <span class="text-gold not-italic px-6">✦</span> Ember Suya <span class="text-gold not-italic px-6">✦</span> Egusi & Pounded Yam <span class="text-gold not-italic px-6">✦</span> Ofada & Ayamase <span class="text-gold not-italic px-6">✦</span> Nkwobi Royale <span class="text-gold not-italic px-6">✦</span> Asun Bites <span class="text-gold not-italic px-6">✦</span></span>
+      <span class="px-6">Smoky Party Jollof <span class="text-gold not-italic px-6">✦</span> Peppered Snail <span class="text-gold not-italic px-6">✦</span> Ember Suya <span class="text-gold not-italic px-6">✦</span> Egusi & Pounded Yam <span class="text-gold not-italic px-6">✦</span> Ofada & Ayamase <span class="text-gold not-italic px-6">✦</span> Nkwobi Royale <span class="text-gold not-italic px-6">✦</span> Asun Bites <span class="text-gold not-italic px-6">✦</span></span>
+    </div>
+  </div>
+
+  <!-- BRAND INTRO -->
+  <section class="relative py-24 md:py-36 bg-ink overflow-hidden">
+    <span class="absolute top-10 left-0 headline-serif text-[18vw] leading-none text-stroke opacity-[.07] select-none pointer-events-none whitespace-nowrap">ÁJÉ ÁJÉ ÁJÉ</span>
+    <div class="max-w-[1300px] mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+      <div class="relative" data-reveal="left">
+        <div class="img-frame">
+          <div class="rounded-2xl overflow-hidden">
+            <img data-parallax src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1000&auto=format&fit=crop" class="w-full h-[420px] md:h-[560px] object-cover scale-110" alt="Fine dining"/>
+          </div>
+        </div>
+        <div class="absolute -bottom-8 -right-4 md:-right-8 w-44 md:w-64 rounded-2xl overflow-hidden border-4 border-ink shadow-2xl rotate-3">
+          <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=600&auto=format&fit=crop" class="w-full h-40 md:h-52 object-cover" alt="Close up stew"/>
+        </div>
+        <div class="absolute -top-6 -left-4 md:-left-6 bg-gold text-ink rounded-2xl px-6 py-4 shadow-xl -rotate-3">
+          <p class="headline-serif font-bold text-3xl leading-none">9<span class="text-sm">yrs</span></p>
+          <p class="text-[10px] font-extrabold tracking-[.25em] mt-1">OF MASTERY</p>
+        </div>
+      </div>
+      <div data-reveal="right">
+        <span class="eyebrow">Our Essence</span>
+        <h2 class="headline-serif text-4xl md:text-6xl font-bold mt-5 leading-[1.05]">Not just food.<br/><span class="italic font-medium text-gold">A homecoming</span> on a plate.</h2>
+        <p class="font-cormorant italic text-xl md:text-2xl text-cream/70 mt-6 leading-relaxed">“We took the flavours your grandmother perfected — and gave them a five-star stage.”</p>
+        <p class="text-cream/55 leading-relaxed mt-5 font-light">Every pepper is roasted. Every stew simmers for hours. Every plate leaves our kitchen like it’s going to a wedding — because for us, <span class="text-cream font-semibold">every meal is a celebration.</span></p>
+        <div class="grid grid-cols-3 gap-6 mt-9 py-8 border-y border-white/10">
+          <div><p class="headline-serif text-3xl md:text-4xl font-bold text-gold"><span class="counter" data-target="48">0</span></p><p class="text-[10px] tracking-[.25em] text-cream/50 font-bold mt-1">SIGNATURE DISHES</p></div>
+          <div><p class="headline-serif text-3xl md:text-4xl font-bold text-gold"><span class="counter" data-target="15">0</span></p><p class="text-[10px] tracking-[.25em] text-cream/50 font-bold mt-1">MASTER CHEFS</p></div>
+          <div><p class="headline-serif text-3xl md:text-4xl font-bold text-gold"><span class="counter" data-target="100">0</span>%</p><p class="text-[10px] tracking-[.25em] text-cream/50 font-bold mt-1">FRESH DAILY</p></div>
+        </div>
+        <div class="flex flex-wrap gap-4 mt-8">
+          <a href="#" data-link="about" class="nav-go btn-outline">Discover Our Story</a>
+          <a href="#" data-link="experience" class="nav-go text-gold text-sm font-bold tracking-[.15em] uppercase flex items-center gap-2 hover:gap-4 transition-all self-center">Watch the film <i class="fa-solid fa-play text-xs"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNATURE DISHES -->
+  <section class="py-24 md:py-32 bg-gradient-to-b from-ink via-coal to-ink relative">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14" data-reveal>
+        <div>
+          <span class="eyebrow">01 — Signature Dishes</span>
+          <h2 class="headline-serif text-4xl md:text-6xl font-bold mt-4">Loved. Craved.<br/><span class="italic font-medium text-gold">Ordered again.</span></h2>
+        </div>
+        <p class="text-cream/50 max-w-sm font-light md:text-right">The six plates that built our name. Photographed a thousand times. Finished in minutes.</p>
+      </div>
+      <div id="signatureGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7"></div>
+      <div class="text-center mt-12" data-reveal>
+        <a href="#" data-link="menu" class="nav-go btn-gold">See Full Menu <i class="fa-solid fa-arrow-right text-xs"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMMERSIVE EXPERIENCE -->
+  <section class="py-24 md:py-32 bg-ink relative overflow-hidden" id="immersive">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
+      <div class="text-center max-w-2xl mx-auto mb-16" data-reveal>
+        <span class="eyebrow center">02 — The Experience</span>
+        <h2 class="headline-serif text-4xl md:text-6xl font-bold mt-4 leading-tight">Close your eyes.<br/><span class="italic text-gold font-medium">Now taste this.</span></h2>
+        <p class="text-cream/50 mt-4 font-light">Scroll slowly. This is what happens from the moment your plate arrives.</p>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16">
+        <div class="relative order-2 lg:order-1">
+          <div class="lg:sticky lg:top-28 rounded-[28px] overflow-hidden h-[420px] md:h-[600px] border border-gold/20 shadow-2xl">
+            <div class="exp-img active"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Plated meal"/></div>
+            <div class="exp-img"><img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Close up"/></div>
+            <div class="exp-img"><img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Reaching"/></div>
+            <div class="exp-img"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Picked up"/></div>
+            <div class="exp-img"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="To mouth"/></div>
+            <div class="exp-img"><img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Eating"/></div>
+            <div class="exp-img"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Satisfied"/></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-ink/90 via-transparent to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-6 left-6 right-6 flex items-center justify-between">
+              <div><p class="text-[10px] tracking-[.35em] text-gold font-bold" id="expKicker">SCENE 01 / 07</p><p class="headline-serif italic text-2xl" id="expCaption">The Arrival</p></div>
+              <div class="flex gap-1.5" id="expDots"></div>
+            </div>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2 flex flex-col gap-2" id="expSteps">
+          <div class="exp-step active rounded-r-2xl p-6 md:p-8 pl-8" data-reveal><div class="flex gap-5"><div class="step-dot">01</div><div><h3 class="headline-serif text-2xl font-bold">The Arrival</h3><p class="text-cream/55 font-light mt-2 leading-relaxed">Steam rises. The aroma hits first — smoked pepper, grilled fire, rich palm oil. Your table goes quiet.</p></div></div></div>
+          <div class="exp-step rounded-r-2xl p-6 md:p-8 pl-8" data-reveal><div class="flex gap-5"><div class="step-dot">02</div><div><h3 class="headline-serif text-2xl font-bold">The Close-Up</h3><p class="text-cream/55 font-light mt-2 leading-relaxed">Glistening snail. Char-kissed suya. Jollof grains standing separate, smoky and deep red. You already know.</p></div></div></div>
+          <div class="exp-step rounded-r-2xl p-6 md:p-8 pl-8" data-reveal><div class="flex gap-5"><div class="step-dot">03</div><div><h3 class="headline-serif text-2xl font-bold">The Reach</h3><p class="text-cream/55 font-light mt-2 leading-relaxed">Your hand moves on its own. No posing. No patience. Just instinct — the food is calling.</p></div></div></div>
+          <div class="exp-step rounded-r-2xl p-6 md:p-8 pl-8" data-reveal><div class="flex gap-5"><div class="step-dot">04</div><div><h3 class="headline-serif text-2xl font-bold">The Lift</h3><p class="text-cream/55 font-light mt-2 leading-relaxed">Tender meat pulls apart. Sauce drips slowly. This is the moment your phone comes out — then goes back down.</p></div></div></div>
+          <div class="exp-step rounded-r-2xl p-6 md:p-8 pl-8" data-reveal><div class="flex gap-5"><div class="step-dot">05</div><div><h3 class="headline-serif text-2xl font-bold">The First Bite</h3><p class="text-cream/55 font-light mt-2 leading-relaxed">Heat. Smoke. Depth. Then that slow, rich finish that only real fire and patience can build.</p></div></div></div>
+          <div class="exp-step rounded-r-2xl p-6 md:p-8 pl-8" data-reveal><div class="flex gap-5"><div class="step-dot">06</div><div><h3 class="headline-serif text-2xl font-bold">The Surrender</h3><p class="text-cream/55 font-light mt-2 leading-relaxed">Eyes close. Shoulders drop. Conversation stops. It’s just you and the plate now.</p></div></div></div>
+          <div class="exp-step rounded-r-2xl p-6 md:p-8 pl-8" data-reveal><div class="flex gap-5"><div class="step-dot">07</div><div><h3 class="headline-serif text-2xl font-bold">The Craving</h3><p class="text-cream/55 font-light mt-2 leading-relaxed">Empty plate. Full heart. And one thought: <span class="text-gold italic font-cormorant text-lg">“I’m ordering this again tomorrow.”</span></p><button onclick="openCart()" class="btn-gold mt-5 !py-3 !px-7">Start Your Moment</button></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="py-24 md:py-32 bg-cream text-ink relative overflow-hidden">
+    <div class="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full bg-gold/10 blur-3xl"></div>
+    <div class="max-w-[1300px] mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16" data-reveal>
+        <span class="eyebrow center">03 — Why ÁJÉ</span>
+        <h2 class="headline-serif text-4xl md:text-6xl font-bold mt-4">Five promises in <span class="italic text-ember">every bite.</span></h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-5">
+        <div class="bg-white rounded-3xl p-8 shadow-[0_20px_60px_rgba(61,35,20,.12)] border border-bark/10 hover:-translate-y-3 hover:shadow-2xl transition-all duration-500 group" data-reveal><div class="w-14 h-14 rounded-2xl bg-leaf text-cream flex items-center justify-center text-xl mb-6 group-hover:rotate-12 transition-transform"><i class="fa-solid fa-leaf"></i></div><h3 class="headline-serif text-xl font-bold">Fresh Ingredients</h3><p class="text-sm text-ink/55 mt-3 leading-relaxed">Markets at dawn. Nothing frozen, nothing rushed. Farm to fire, daily.</p><p class="headline-serif italic text-gold text-lg mt-4">01</p></div>
+        <div class="bg-white rounded-3xl p-8 shadow-[0_20px_60px_rgba(61,35,20,.12)] border border-bark/10 hover:-translate-y-3 hover:shadow-2xl transition-all duration-500 group" data-reveal style="transition-delay:.08s"><div class="w-14 h-14 rounded-2xl bg-bark text-cream flex items-center justify-center text-xl mb-6 group-hover:rotate-12 transition-transform"><i class="fa-solid fa-fire-burner"></i></div><h3 class="headline-serif text-xl font-bold">Expert Preparation</h3><p class="text-sm text-ink/55 mt-3 leading-relaxed">15 chefs. Slow stews. Real charcoal. Techniques passed down, perfected up.</p><p class="headline-serif italic text-gold text-lg mt-4">02</p></div>
+        <div class="bg-ink text-cream rounded-3xl p-8 shadow-2xl hover:-translate-y-3 transition-all duration-500 group lg:scale-105 border border-gold/30" data-reveal style="transition-delay:.16s"><div class="w-14 h-14 rounded-2xl bg-gold text-ink flex items-center justify-center text-xl mb-6 group-hover:rotate-12 transition-transform"><i class="fa-solid fa-pepper-hot"></i></div><h3 class="headline-serif text-xl font-bold">Bold Flavours</h3><p class="text-sm text-cream/60 mt-3 leading-relaxed">Smoke, heat, depth. Flavour that doesn’t whisper — it announces itself.</p><p class="headline-serif italic text-gold text-lg mt-4">03</p></div>
+        <div class="bg-white rounded-3xl p-8 shadow-[0_20px_60px_rgba(61,35,20,.12)] border border-bark/10 hover:-translate-y-3 hover:shadow-2xl transition-all duration-500 group" data-reveal style="transition-delay:.24s"><div class="w-14 h-14 rounded-2xl bg-ember text-cream flex items-center justify-center text-xl mb-6 group-hover:rotate-12 transition-transform"><i class="fa-solid fa-wand-magic-sparkles"></i></div><h3 class="headline-serif text-xl font-bold">Beautiful Presentation</h3><p class="text-sm text-ink/55 mt-3 leading-relaxed">Plated like art. Every dish arrives camera-ready — and heart-ready.</p><p class="headline-serif italic text-gold text-lg mt-4">04</p></div>
+        <div class="bg-white rounded-3xl p-8 shadow-[0_20px_60px_rgba(61,35,20,.12)] border border-bark/10 hover:-translate-y-3 hover:shadow-2xl transition-all duration-500 group" data-reveal style="transition-delay:.32s"><div class="w-14 h-14 rounded-2xl bg-gold text-ink flex items-center justify-center text-xl mb-6 group-hover:rotate-12 transition-transform"><i class="fa-solid fa-bolt"></i></div><h3 class="headline-serif text-xl font-bold">Fast Service</h3><p class="text-sm text-ink/55 mt-3 leading-relaxed">Hot in 25 minutes, anywhere in Lekki & VI. Luxury shouldn’t wait.</p><p class="headline-serif italic text-gold text-lg mt-4">05</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED MENU -->
+  <section class="py-24 md:py-32 bg-ink">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
+      <div class="text-center mb-10" data-reveal>
+        <span class="eyebrow center">04 — Featured Menu</span>
+        <h2 class="headline-serif text-4xl md:text-6xl font-bold mt-4">Choose your <span class="italic text-gold font-medium">craving.</span></h2>
+      </div>
+      <div class="flex gap-3 overflow-x-auto pb-4 justify-start md:justify-center mb-12 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" id="homeTabs" data-reveal></div>
+      <div id="featuredGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="py-24 md:py-32 bg-gradient-to-b from-coal to-ink relative overflow-hidden">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 headline-serif text-[26vw] text-white/[.02] select-none pointer-events-none">”</div>
+    <div class="max-w-[900px] mx-auto px-6 text-center">
+      <span class="eyebrow center" data-reveal>05 — Customer Experience</span>
+      <h2 class="headline-serif text-4xl md:text-5xl font-bold mt-4 mb-12" data-reveal>Lagos is <span class="italic text-gold">talking.</span></h2>
+      <div class="relative h-[340px] sm:h-[280px] md:h-[260px]" id="testiWrap" data-reveal></div>
+      <div class="flex items-center justify-center gap-3 mt-6" id="testiDots"></div>
+      <div class="flex items-center justify-center gap-4 mt-8">
+        <button onclick="moveTesti(-1)" class="w-12 h-12 rounded-full border border-white/15 hover:border-gold hover:text-gold transition flex items-center justify-center"><i class="fa-solid fa-arrow-left text-sm"></i></button>
+        <button onclick="moveTesti(1)" class="w-12 h-12 rounded-full border border-white/15 hover:border-gold hover:text-gold transition flex items-center justify-center"><i class="fa-solid fa-arrow-right text-sm"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY PREVIEW -->
+  <section class="py-24 md:py-32 bg-ink">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12" data-reveal>
+        <div><span class="eyebrow">06 — Food Gallery</span><h2 class="headline-serif text-4xl md:text-6xl font-bold mt-4">A feast for<br/><span class="italic text-gold font-medium">your eyes first.</span></h2></div>
+        <a href="#" data-link="gallery" class="nav-go btn-outline">View Full Gallery</a>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[180px] md:auto-rows-[240px]">
+        <div class="g-item row-span-2" data-reveal onclick="openLightbox(this.querySelector('img').src)"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Suya"/><div class="g-overlay"><p class="headline-serif italic text-lg">Ember Suya</p></div></div>
+        <div class="g-item" data-reveal onclick="openLightbox(this.querySelector('img').src)"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Bowl"/><div class="g-overlay"><p class="headline-serif italic text-lg">Rainbow Bowl</p></div></div>
+        <div class="g-item row-span-2" data-reveal onclick="openLightbox(this.querySelector('img').src)"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Grill"/><div class="g-overlay"><p class="headline-serif italic text-lg">Fire & Smoke</p></div></div>
+        <div class="g-item" data-reveal onclick="openLightbox(this.querySelector('img').src)"><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Dessert"/><div class="g-overlay"><p class="headline-serif italic text-lg">Sweet Endings</p></div></div>
+        <div class="g-item" data-reveal onclick="openLightbox(this.querySelector('img').src)"><img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Kitchen"/><div class="g-overlay"><p class="headline-serif italic text-lg">From Our Fire</p></div></div>
+        <div class="g-item" data-reveal onclick="openLightbox(this.querySelector('img').src)"><img src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Drinks"/><div class="g-overlay"><p class="headline-serif italic text-lg">Chapman Royale</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="relative py-32 md:py-44 overflow-hidden">
+    <img data-parallax src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2000&auto=format&fit=crop" class="absolute inset-0 w-full h-[130%] object-cover -top-[15%]" alt="Feast"/>
+    <div class="absolute inset-0 bg-ink/75"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-ink via-transparent to-ink"></div>
+    <div class="relative z-10 max-w-3xl mx-auto px-6 text-center" data-reveal="scale">
+      <p class="font-script text-4xl text-caramel">hungry yet?</p>
+      <h2 class="headline-serif text-5xl md:text-7xl font-bold mt-3 leading-[1.02]">Your next favourite meal <span class="italic text-gold">is waiting.</span></h2>
+      <p class="text-cream/65 mt-6 font-light text-lg">Hot. Fresh. At your door in 25 minutes — or on a candlelit table tonight.</p>
+      <div class="flex flex-wrap justify-center gap-4 mt-10">
+        <button onclick="openCart()" class="btn-gold !px-12 !py-5 !text-sm">Order Now <i class="fa-solid fa-fire text-xs"></i></button>
+        <a href="https://wa.me/2348012345678?text=Hello%20%C3%81J%C3%89!%20I%20want%20to%20order." target="_blank" class="btn-outline !py-5"><i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp Us</a>
+      </div>
+      <p class="text-[11px] tracking-[.3em] text-cream/40 font-bold mt-8">OPEN DAILY 9AM – 11PM • LEKKI • VI • IKEJA DELIVERY</p>
+    </div>
+  </section>
+</div>
+
+<!-- ================================================= ABOUT PAGE ================================================= -->
+<div class="page" id="page-about">
+  <header class="relative min-h-[85vh] flex items-end overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=2000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover hero-img" alt="Kitchen"/>
+    <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-ink/60"></div>
+    <div class="relative z-10 max-w-[1300px] mx-auto px-6 lg:px-10 pb-20 w-full">
+      <span class="eyebrow">Our Story</span>
+      <h1 class="headline-serif text-5xl md:text-8xl font-bold mt-4 leading-[.95]">Born from fire.<br/><span class="italic text-gold font-medium">Raised by flavour.</span></h1>
+      <p class="text-cream/65 max-w-xl mt-6 font-light text-lg">From a two-pot roadside dream in Surulere to Lagos’ most celebrated modern Nigerian kitchen.</p>
+    </div>
+  </header>
+  <section class="py-20 md:py-28 bg-ink">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-14 items-center">
+      <div data-reveal="left">
+        <span class="eyebrow">Chapter One — 2016</span>
+        <h2 class="headline-serif text-4xl md:text-5xl font-bold mt-4">It started with Mama’s pot.</h2>
+        <p class="font-cormorant italic text-2xl text-gold/90 mt-5">“If the stew doesn’t make you close your eyes, start again.”</p>
+        <p class="text-cream/55 mt-5 leading-relaxed font-light">Our founder, Chef Adéola Bakare, grew up grinding pepper by hand and tending firewood under her grandmother’s watchful eye. ÁJÉ began as a Sunday-only kitchen serving 20 plates. Today we serve thousands — <span class="text-cream">but every pot still gets grandmother-level attention.</span></p>
+        <div class="flex gap-8 mt-8">
+          <div><p class="headline-serif text-4xl font-bold text-gold">2016</p><p class="text-xs tracking-widest text-cream/50 font-bold">FOUNDED</p></div>
+          <div><p class="headline-serif text-4xl font-bold text-gold">320k+</p><p class="text-xs tracking-widest text-cream/50 font-bold">PLATES SERVED</p></div>
+          <div><p class="headline-serif text-4xl font-bold text-gold">14</p><p class="text-xs tracking-widest text-cream/50 font-bold">AWARDS</p></div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4" data-reveal="right">
+        <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=600&auto=format&fit=crop" class="rounded-2xl h-64 md:h-80 w-full object-cover" alt="Chef"/>
+        <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?q=80&w=600&auto=format&fit=crop" class="rounded-2xl h-64 md:h-80 w-full object-cover mt-8" alt="Plating"/>
+      </div>
+    </div>
+  </section>
+  <section class="py-20 bg-coal">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-10">
+      <div class="text-center mb-12" data-reveal><span class="eyebrow center">Our Philosophy</span><h2 class="headline-serif text-4xl md:text-5xl font-bold mt-4">Heritage, <span class="italic text-gold">elevated.</span></h2></div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="rounded-3xl overflow-hidden relative h-96 group" data-reveal><img src="https://images.unsplash.com/photo-1598866594230-a7c12756260f?q=80&w=700&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-1000" alt="Peppers"/><div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent"></div><div class="absolute bottom-0 p-8"><p class="text-gold text-xs tracking-[.3em] font-bold">01</p><h3 class="headline-serif text-2xl font-bold mt-2">Respect the Root</h3><p class="text-cream/65 text-sm mt-2 font-light">We never dilute tradition. We honour it — then plate it beautifully.</p></div></div>
+        <div class="rounded-3xl overflow-hidden relative h-96 group" data-reveal style="transition-delay:.1s"><img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?q=80&w=700&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-1000" alt="Plating"/><div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent"></div><div class="absolute bottom-0 p-8"><p class="text-gold text-xs tracking-[.3em] font-bold">02</p><h3 class="headline-serif text-2xl font-bold mt-2">Obsess the Detail</h3><p class="text-cream/65 text-sm mt-2 font-light">Char levels, stew viscosity, plantain caramelisation — measured, mastered.</p></div></div>
+        <div class="rounded-3xl overflow-hidden relative h-96 group" data-reveal style="transition-delay:.2s"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=700&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-1000" alt="People"/><div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent"></div><div class="absolute bottom-0 p-8"><p class="text-gold text-xs tracking-[.3em] font-bold">03</p><h3 class="headline-serif text-2xl font-bold mt-2">Feed the Soul</h3><p class="text-cream/65 text-sm mt-2 font-light">A meal at ÁJÉ should feel like Friday night, Detty December, home.</p></div></div>
+      </div>
+    </div>
+  </section>
+  <section class="py-20 md:py-28 bg-cream text-ink">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
+      <div data-reveal="left" class="img-frame !border-bark/20 !bg-bark/5"><img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=900&auto=format&fit=crop" class="rounded-2xl w-full h-[440px] object-cover" alt="Our kitchen"/></div>
+      <div data-reveal="right">
+        <span class="eyebrow">Our Kitchen — What Makes Us Different</span>
+        <h2 class="headline-serif text-4xl md:text-5xl font-bold mt-4">Real fire. No shortcuts.</h2>
+        <div class="mt-8 space-y-5">
+          <div class="flex gap-4 bg-white rounded-2xl p-5 shadow-sm border border-bark/10"><div class="w-11 h-11 rounded-xl bg-ink text-gold flex items-center justify-center shrink-0"><i class="fa-solid fa-fire"></i></div><div><h4 class="font-bold">Charcoal & Firewood Stations</h4><p class="text-sm text-ink/55">That irreplaceable smokiness? It only comes from real fire.</p></div></div>
+          <div class="flex gap-4 bg-white rounded-2xl p-5 shadow-sm border border-bark/10"><div class="w-11 h-11 rounded-xl bg-ink text-gold flex items-center justify-center shrink-0"><i class="fa-solid fa-mortar-pestle"></i></div><div><h4 class="font-bold">Spices Ground In-House</h4><p class="text-sm text-ink/55">Cameroon pepper, ehuru, uda — roasted and pounded fresh every morning.</p></div></div>
+          <div class="flex gap-4 bg-white rounded-2xl p-5 shadow-sm border border-bark/10"><div class="w-11 h-11 rounded-xl bg-ink text-gold flex items-center justify-center shrink-0"><i class="fa-solid fa-clock"></i></div><div><h4 class="font-bold">Slow by Design</h4><p class="text-sm text-ink/55">Our ayamase simmers 6 hours. Our banga, 5. Patience is our secret spice.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-24 bg-ink text-center relative overflow-hidden">
+    <div class="max-w-2xl mx-auto px-6" data-reveal="scale">
+      <span class="eyebrow center">Our Promise</span>
+      <h2 class="headline-serif text-4xl md:text-6xl font-bold mt-5 leading-tight">If it isn’t the best Nigerian meal you’ve had this year — <span class="italic text-gold">dessert is on us.</span></h2>
+      <div class="flex flex-wrap justify-center gap-4 mt-10"><button onclick="openCart()" class="btn-gold">Taste the Promise</button><a href="#" data-link="menu" class="nav-go btn-outline">Explore Menu</a></div>
+    </div>
+  </section>
+</div>
+
+<!-- ================================================= MENU PAGE ================================================= -->
+<div class="page" id="page-menu">
+  <header class="relative pt-40 pb-16 bg-coal overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-20" alt="bg"/>
+    <div class="absolute inset-0 bg-gradient-to-b from-ink/80 via-coal/70 to-ink"></div>
+    <div class="relative max-w-[1200px] mx-auto px-6 text-center">
+      <span class="eyebrow center">The Full Menu</span>
+      <h1 class="headline-serif text-5xl md:text-7xl font-bold mt-4">Every craving, <span class="italic text-gold">answered.</span></h1>
+      <p class="text-cream/55 mt-4 font-light">Filter by mood. Everything is made fresh to order.</p>
+      <div class="max-w-md mx-auto mt-8 relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-gold"></i>
+        <input id="menuSearch" oninput="renderFullMenu()" placeholder="Search jollof, snail, suya..." class="lux-input !pl-12 !rounded-full !py-4 text-center"/>
+      </div>
+    </div>
+  </header>
+  <section class="pb-28 bg-ink">
+    <div class="max-w-[1300px] mx-auto px-6 lg:px-10">
+      <div class="flex gap-3 overflow-x-auto pb-6 justify-start md:justify-center mb-8 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sticky top-[64px] z-20 bg-ink/90 backdrop-blur-xl py-4" id="fullTabs"></div>
+      <p id="menuCount" class="text-center text-[11px] tracking-[.3em] text-gold font-bold mb-8"></p>
+      <div id="fullMenuGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+      <div class="mt-16 rounded-3xl overflow-hidden relative" data-reveal>
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1600&auto=format&fit=crop" class="w-full h-72 md:h-80 object-cover" alt="Chef note"/>
+        <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-transparent flex items-center"><div class="p-8 md:p-14 max-w-xl"><p class="text-[11px] tracking-[.35em] text-gold font-bold">CHEF'S NOTE</p><p class="font-cormorant italic text-2xl md:text-3xl mt-3 leading-snug">“Order the peppered snail if you want to understand us in one bite.”</p><p class="text-cream/60 text-sm mt-3">— Chef Adéola Bakare, Founder</p></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================================================= EXPERIENCE PAGE ================================================= -->
+<div class="page" id="page-experience">
+  <section class="relative h-screen overflow-hidden" id="xpHero">
+    <div class="xp-slide active"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover" alt=""/><div class="absolute inset-0 bg-ink/55"></div></div>
+    <div class="xp-slide"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover" alt=""/><div class="absolute inset-0 bg-ink/55"></div></div>
+    <div class="xp-slide"><img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover" alt=""/><div class="absolute inset-0 bg-ink/55"></div></div>
+    <div class="xp-slide"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover" alt=""/><div class="absolute inset-0 bg-ink/55"></div></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/60 pointer-events-none"></div>
+    <div class="absolute inset-0 flex items-center">
+      <div class="max-w-[1200px] mx-auto px-6 w-full">
+        <p class="text-[11px] tracking-[.4em] text-gold font-bold" id="xpKicker">ACT I — THE FIRE</p>
+        <h1 class="headline-serif text-6xl md:text-8xl font-bold mt-4 leading-[.95] max-w-4xl" id="xpTitle">Dinner is not dinner.<br/><span class="italic text-gold">It’s theatre.</span></h1>
+        <p class="text-cream/70 mt-5 max-w-xl font-light text-lg" id="xpDesc">Charcoal crackles. Peppers hit hot oil. The whole room turns to look. This is the ÁJÉ experience.</p>
+        <div class="flex gap-4 mt-8"><button onclick="openCart()" class="btn-gold">Book Your Table</button><button onclick="xpNext()" class="btn-outline">Next Scene <i class="fa-solid fa-arrow-right text-xs"></i></button></div>
+      </div>
+    </div>
+    <div class="absolute bottom-10 left-0 right-0"><div class="max-w-[1200px] mx-auto px-6 flex items-center gap-4">
+      <button onclick="xpPrev()" class="w-12 h-12 rounded-full border border-white/25 hover:border-gold hover:text-gold transition flex items-center justify-center"><i class="fa-solid fa-arrow-left"></i></button>
+      <button onclick="xpNext()" class="w-12 h-12 rounded-full border border-white/25 hover:border-gold hover:text-gold transition flex items-center justify-center"><i class="fa-solid fa-arrow-right"></i></button>
+      <div class="flex-1 h-[2px] bg-white/15 rounded overflow-hidden"><div id="xpBar" class="h-full bg-gold transition-all duration-700" style="width:25%"></div></div>
+      <span class="text-sm font-bold tracking-widest" id="xpCount">01 / 04</span>
+    </div></div>
+  </section>
+  <section class="py-24 bg-ink">
+    <div class="max-w-[1200px] mx-auto px-6">
+      <div class="text-center mb-14" data-reveal><span class="eyebrow center">The Senses</span><h2 class="headline-serif text-4xl md:text-6xl font-bold mt-4">Five senses. <span class="italic text-gold">One obsession.</span></h2></div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="group rounded-3xl overflow-hidden relative h-[480px]" data-reveal><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=700&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-1000" alt=""/><div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent"></div><div class="absolute bottom-0 p-8"><i class="fa-solid fa-eye text-gold text-2xl"></i><h3 class="headline-serif text-3xl font-bold mt-3">Sight</h3><p class="text-cream/60 font-light mt-2">Candlelight. Brass. Deep reds and golds. The room glows like jollof at golden hour.</p></div></div>
+        <div class="group rounded-3xl overflow-hidden relative h-[480px] md:mt-12" data-reveal style="transition-delay:.1s"><img src="https://images.unsplash.com/photo-1598866594230-a7c12756260f?q=80&w=700&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-1000" alt=""/><div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent"></div><div class="absolute bottom-0 p-8"><i class="fa-solid fa-wind text-gold text-2xl"></i><h3 class="headline-serif text-3xl font-bold mt-3">Smell</h3><p class="text-cream/60 font-light mt-2">Roasted pepper. Suya smoke. Fried plantain caramel. You’ll smell us before you see us.</p></div></div>
+        <div class="group rounded-3xl overflow-hidden relative h-[480px]" data-reveal style="transition-delay:.2s"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=700&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-1000" alt=""/><div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent"></div><div class="absolute bottom-0 p-8"><i class="fa-solid fa-music text-gold text-2xl"></i><h3 class="headline-serif text-3xl font-bold mt-3">Sound</h3><p class="text-cream/60 font-light mt-2">Afrobeats low. Laughter high. Sizzle from the open kitchen as your soundtrack.</p></div></div>
+      </div>
+      <div class="mt-16 grid md:grid-cols-2 gap-6">
+        <div class="rounded-3xl bg-gradient-to-br from-bark to-coal border border-gold/20 p-10 md:p-14" data-reveal><p class="text-[11px] tracking-[.35em] text-gold font-bold">PRIVATE DINING</p><h3 class="headline-serif text-3xl md:text-4xl font-bold mt-3">The Ember Room — for 8 guests.</h3><p class="text-cream/60 mt-3 font-light">Chef’s table. Seven courses. Wine pairings. The most intimate dinner in Lagos.</p><button onclick="openReserve()" class="btn-gold mt-7">Reserve the Room</button></div>
+        <div class="rounded-3xl overflow-hidden relative min-h-[320px]" data-reveal><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=900&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt=""/><div class="absolute inset-0 bg-gradient-to-t from-ink/90 to-transparent"></div><div class="absolute bottom-0 p-10"><p class="text-[11px] tracking-[.35em] text-gold font-bold">OWAMBE & EVENTS</p><h3 class="headline-serif text-3xl font-bold mt-2">We cater the parties people remember.</h3><a href="https://wa.me/2348012345678?text=Hello!%20I%20need%20catering%20for%20my%20event." target="_blank" class="inline-flex items-center gap-2 text-gold font-bold text-sm tracking-widest mt-4 hover:gap-4 transition-all">GET A QUOTE <i class="fa-solid fa-arrow-right"></i></a></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================================================= PRICING PAGE ================================================= -->
+<div class="page" id="page-pricing">
+  <header class="pt-40 pb-14 bg-ink text-center relative overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-gold/10 blur-[120px] rounded-full"></div>
+    <div class="relative max-w-2xl mx-auto px-6">
+      <span class="eyebrow center">Tasting Experiences</span>
+      <h1 class="headline-serif text-5xl md:text-7xl font-bold mt-4">Choose your <span class="italic text-gold">indulgence.</span></h1>
+      <p class="text-cream/55 mt-4 font-light">Curated multi-course journeys. One price. Zero regret.</p>
+      <div class="inline-flex items-center gap-1 bg-white/5 border border-white/10 rounded-full p-1.5 mt-8">
+        <button class="px-7 py-2.5 rounded-full text-xs font-extrabold tracking-widest bg-gold text-ink" id="billDine" onclick="setBilling('dine')">DINE-IN</button>
+        <button class="px-7 py-2.5 rounded-full text-xs font-extrabold tracking-widest text-cream/60" id="billHome" onclick="setBilling('home')">AT HOME +₦5k</button>
+      </div>
+    </div>
+  </header>
+  <section class="pb-24 bg-ink">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-10 grid md:grid-cols-3 gap-6 items-stretch">
+      <div class="price-card p-9 flex flex-col" data-reveal>
+        <p class="text-[11px] tracking-[.35em] font-bold text-cream/50">CLASSIC</p>
+        <h3 class="headline-serif text-3xl font-bold mt-2">The Homecoming</h3>
+        <p class="headline-serif text-5xl font-bold mt-6">₦<span class="p-val" data-dine="12500" data-home="17500">12,500</span></p>
+        <p class="text-cream/45 text-sm mt-1">per guest • 3 courses</p>
+        <div class="divider-gold my-7"></div>
+        <ul class="space-y-3.5 text-sm text-cream/70 font-light flex-1">
+          <li class="flex gap-3"><i class="fa-solid fa-check text-gold mt-1"></i> Welcome chapman or zobo</li>
+          <li class="flex gap-3"><i class="fa-solid fa-check text-gold mt-1"></i> Small chops & asun starter</li>
+          <li class="flex gap-3"><i class="fa-solid fa-check text-gold mt-1"></i> Choice of 2 mains + 1 side</li>
+          <li class="flex gap-3"><i class="fa-solid fa-check text-gold mt-1"></i> Puff-puff dessert bites</li>
+          <li class="flex gap-3 opacity-40"><i class="fa-solid fa-xmark mt-1"></i> Chef’s table access</li>
+        </ul>
+        <button onclick="bookExperience('Classic — The Homecoming')" class="btn-outline w-full mt-8">Book Classic</button>
+      </div>
+      <div class="price-card featured p-9 flex flex-col relative md:-my-4 md:py-12" data-reveal style="transition-delay:.1s">
+        <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-caramel to-gold text-ink text-[10px] font-extrabold tracking-[.25em] px-6 py-2 rounded-full shadow-lg">MOST LOVED ★</span>
+        <p class="text-[11px] tracking-[.35em] font-bold text-gold">SIGNATURE</p>
+        <h3 class="headline-serif text-3xl font-bold mt-2">The Owambe</h3>
+        <p class="headline-serif text-5xl font-bold mt-6 text-gold">₦<span class="p-val" data-dine="28000" data-home="33000">28,000</span></p>
+        <p class="text-cream/45 text-sm mt-1">per guest • 5 courses</p>
+        <div class="divider-gold my-7"></div>
+        <ul class="space-y-3.5 text-sm text-cream/75 font-light flex-1">
+          <li class="flex gap-3"><i class="fa-solid fa-check text-gold mt-1"></i> Palm-wine spritz welcome</li>
+          <li class="flex gap-3"><i class="fa-solid fa-check text-gold mt-1"></i> Peppered snail & nkwobi tasting</li>
+          <li class="flex gap-3"><i class="fa-solid fa-check text-gold mt-1"></i> Smoky jollof + egusi & pounded yam</li>
+          <li class="flex gap-3"><i class="fa-solid fa-check text-gold mt-1"></i> Ember suya live-fire course</li>
+          <li class="flex gap-3"><i class="fa-solid fa-check text-gold mt-1"></i> Premium dessert + tigernut cream</li>
+        </ul>
+        <button onclick="bookExperience('Signature — The Owambe')" class="btn-gold w-full mt-8">Book Signature</button>
+      </div>
+      <div class="price-card p-9 flex flex-col" data-reveal style="transition-delay:.2s">
+        <p class="text-[11px] tracking-[.35em] font-bold text-cream/50">PREMIUM</p>
+        <h3 class="headline-serif text-3xl font-bold mt-2">The Royal Feast</h3>
+        <p class="headline-serif text-5xl font-bold mt-6">₦<span class="p-val" data-dine="55000" data-home="60000">55,000</span></p>
+        <p class="text-cream/45 text-sm mt-1">per guest • 7 courses</p>
+        <div class="divider-gold my-7"></div>
+        <ul class="space-y-3.5 text-sm text-cream/70 font-light flex-1">
+          <li class="flex gap-3"><i class="fa-solid fa-check text-gold mt-1"></i> Private Ember Room seating</li>
+          <li class="flex gap-3"><i class="fa-solid fa-check text-gold mt-1"></i> 7-course chef’s tasting menu</li>
+          <li class="flex gap-3"><i class="fa-solid fa-check text-gold mt-1"></i> Grilled croaker + asun carving</li>
+          <li class="flex gap-3"><i class="fa-solid fa-check text-gold mt-1"></i> Wine & cocktail pairings</li>
+          <li class="flex gap-3"><i class="fa-solid fa-check text-gold mt-1"></i> Personal chef + take-home box</li>
+        </ul>
+        <button onclick="bookExperience('Premium — The Royal Feast')" class="btn-outline w-full mt-8">Book Premium</button>
+      </div>
+    </div>
+    <div class="max-w-3xl mx-auto px-6 mt-16">
+      <h3 class="headline-serif text-3xl font-bold text-center mb-8" data-reveal>Questions, <span class="italic text-gold">answered.</span></h3>
+      <div class="space-y-3">
+        <div class="faq-item bg-white/[.03] border border-white/10 rounded-2xl overflow-hidden" data-reveal><button onclick="this.parentElement.classList.toggle('open')" class="w-full flex items-center justify-between p-6 text-left font-bold">Do I need a reservation? <span class="faq-icon w-8 h-8 rounded-full border border-gold/40 text-gold flex items-center justify-center text-sm shrink-0 ml-4"><i class="fa-solid fa-plus"></i></span></button><div class="faq-a"><p class="px-6 pb-6 text-cream/55 text-sm font-light">Walk-ins are welcome, but weekends fill fast. Signature & Premium experiences require 24-hour booking via WhatsApp or phone.</p></div></div>
+        <div class="faq-item bg-white/[.03] border border-white/10 rounded-2xl overflow-hidden" data-reveal><button onclick="this.parentElement.classList.toggle('open')" class="w-full flex items-center justify-between p-6 text-left font-bold">Do you deliver the tasting experiences? <span class="faq-icon w-8 h-8 rounded-full border border-gold/40 text-gold flex items-center justify-center text-sm shrink-0 ml-4"><i class="fa-solid fa-plus"></i></span></button><div class="faq-a"><p class="px-6 pb-6 text-cream/55 text-sm font-light">Yes — “At Home” adds ₦5,000 for luxury packaging, reheating guides and a personal video from the chef. Lekki, VI & Ikoyi only.</p></div></div>
+        <div class="faq-item bg-white/[.03] border border-white/10 rounded-2xl overflow-hidden" data-reveal><button onclick="this.parentElement.classList.toggle('open')" class="w-full flex items-center justify-between p-6 text-left font-bold">Can you handle large parties & owambe? <span class="faq-icon w-8 h-8 rounded-full border border-gold/40 text-gold flex items-center justify-center text-sm shrink-0 ml-4"><i class="fa-solid fa-plus"></i></span></button><div class="faq-a"><p class="px-6 pb-6 text-cream/55 text-sm font-light">Absolutely. We cater 50–1,000 guests with live stations, servers and full setup. Message us on WhatsApp for a custom quote.</p></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================================================= GALLERY PAGE ================================================= -->
+<div class="page" id="page-gallery">
+  <header class="pt-40 pb-10 bg-ink text-center">
+    <span class="eyebrow center">The Gallery</span>
+    <h1 class="headline-serif text-5xl md:text-7xl font-bold mt-4">Shot fresh. <span class="italic text-gold">Never staged twice.</span></h1>
+    <p class="text-cream/55 mt-4 font-light">Food, fire, people, joy — the world of ÁJÉ.</p>
+  </header>
+  <section class="pb-28 bg-ink">
+    <div class="max-w-[1300px] mx-auto px-6 lg:px-10">
+      <div class="flex gap-3 justify-center flex-wrap mb-10" id="galTabs">
+        <button class="tab-btn active" onclick="setGalFilter('all',this)">All</button>
+        <button class="tab-btn" onclick="setGalFilter('food',this)">Food</button>
+        <button class="tab-btn" onclick="setGalFilter('people',this)">People</button>
+        <button class="tab-btn" onclick="setGalFilter('kitchen',this)">Kitchen & Fire</button>
+        <button class="tab-btn" onclick="setGalFilter('ingredients',this)">Ingredients</button>
+      </div>
+      <div id="galleryGrid" class="columns-2 lg:columns-3 gap-4 [&>div]:mb-4"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ================================================= CONTACT PAGE ================================================= -->
+<div class="page" id="page-contact">
+  <header class="relative pt-44 pb-20 overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-25" alt=""/>
+    <div class="absolute inset-0 bg-gradient-to-b from-ink via-ink/80 to-ink"></div>
+    <div class="relative max-w-3xl mx-auto px-6 text-center">
+      <p class="font-script text-4xl text-caramel">no more craving alone</p>
+      <h1 class="headline-serif text-5xl md:text-7xl font-bold mt-2">Come Experience<br/><span class="italic text-gold">It Yourself.</span></h1>
+      <p class="text-cream/60 mt-5 font-light text-lg">Call, WhatsApp, or walk in. The fire is already lit.</p>
+      <div class="flex flex-wrap justify-center gap-4 mt-8">
+        <a href="tel:+2348012345678" class="btn-gold"><i class="fa-solid fa-phone"></i> +234 801 234 5678</a>
+        <a href="https://wa.me/2348012345678?text=Hello%20%C3%81J%C3%89!%20I%20want%20to%20make%20a%20reservation." target="_blank" class="btn-outline !border-[#25D366]/50 hover:!border-[#25D366] hover:!text-[#25D366]"><i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp</a>
+      </div>
+    </div>
+  </header>
+  <section class="pb-24 bg-ink">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-10 grid lg:grid-cols-5 gap-8">
+      <div class="lg:col-span-2 space-y-5">
+        <div class="rounded-3xl bg-coal border border-white/10 p-8" data-reveal>
+          <h3 class="headline-serif text-2xl font-bold">Visit Us</h3>
+          <div class="mt-6 space-y-5 text-sm">
+            <div class="flex gap-4"><div class="w-11 h-11 rounded-xl bg-gold/15 text-gold flex items-center justify-center shrink-0"><i class="fa-solid fa-location-dot"></i></div><div><p class="font-bold">Flagship — Lekki</p><p class="text-cream/55 font-light">14 Admiralty Way, Lekki Phase 1, Lagos</p></div></div>
+            <div class="flex gap-4"><div class="w-11 h-11 rounded-xl bg-gold/15 text-gold flex items-center justify-center shrink-0"><i class="fa-solid fa-clock"></i></div><div><p class="font-bold">Opening Hours</p><p class="text-cream/55 font-light">Mon – Sun: 9:00am – 11:00pm<br/>Kitchen closes 10:30pm</p></div></div>
+            <div class="flex gap-4"><div class="w-11 h-11 rounded-xl bg-gold/15 text-gold flex items-center justify-center shrink-0"><i class="fa-solid fa-phone"></i></div><div><p class="font-bold">Call Us</p><p class="text-cream/55 font-light">+234 801 234 5678<br/>+234 909 876 5432</p></div></div>
+            <div class="flex gap-4"><div class="w-11 h-11 rounded-xl bg-gold/15 text-gold flex items-center justify-center shrink-0"><i class="fa-solid fa-envelope"></i></div><div><p class="font-bold">Email</p><p class="text-cream/55 font-light">hello@aje-lagos.com</p></div></div>
+          </div>
+          <div class="flex gap-3 mt-7">
+            <a href="#" class="w-11 h-11 rounded-full border border-white/15 flex items-center justify-center hover:bg-gold hover:text-ink hover:border-gold transition"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="w-11 h-11 rounded-full border border-white/15 flex items-center justify-center hover:bg-gold hover:text-ink hover:border-gold transition"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" class="w-11 h-11 rounded-full border border-white/15 flex items-center justify-center hover:bg-gold hover:text-ink hover:border-gold transition"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="w-11 h-11 rounded-full border border-white/15 flex items-center justify-center hover:bg-gold hover:text-ink hover:border-gold transition"><i class="fa-brands fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="rounded-3xl overflow-hidden border border-white/10 h-64 relative" data-reveal>
+          <iframe src="https://maps.google.com/maps?q=Admiralty%20Way%20Lekki%20Lagos&t=&z=14&ie=UTF8&iwloc=&output=embed" class="w-full h-full grayscale invert-[.9] contrast-[.9]" loading="lazy"></iframe>
+          <div class="absolute bottom-4 left-4 bg-ink/90 backdrop-blur border border-gold/30 rounded-full px-5 py-2.5 text-xs font-bold tracking-widest"><i class="fa-solid fa-location-dot text-gold mr-2"></i> LEKKI PHASE 1, LAGOS</div>
+        </div>
+      </div>
+      <div class="lg:col-span-3 rounded-3xl bg-gradient-to-b from-coal to-[#120D09] border border-gold/20 p-8 md:p-12" data-reveal="right">
+        <h3 class="headline-serif text-3xl font-bold">Send a Message</h3>
+        <p class="text-cream/50 text-sm mt-2 font-light">Reservations, catering, feedback — we reply within 1 hour (9am–11pm).</p>
+        <form id="contactForm" onsubmit="submitContact(event)" class="mt-8 grid sm:grid-cols-2 gap-4">
+          <input required placeholder="Your name *" class="lux-input"/>
+          <input required type="tel" placeholder="Phone number *" class="lux-input"/>
+          <input type="email" placeholder="Email address" class="lux-input sm:col-span-2"/>
+          <select class="lux-input sm:col-span-2"><option>Reservation</option><option>Home Delivery</option><option>Catering / Owambe</option><option>Feedback</option><option>Partnership</option></select>
+          <textarea required rows="5" placeholder="Tell us what you're craving... *" class="lux-input sm:col-span-2 resize-none"></textarea>
+          <button class="btn-gold sm:col-span-2 !py-5">Send Message <i class="fa-solid fa-paper-plane text-xs"></i></button>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-[#080604] border-t border-gold/15 pt-16 pb-8 relative overflow-hidden">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-white/8">
+      <div>
+        <div class="flex items-center gap-3"><div class="w-12 h-12 rounded-full border border-gold/40 flex items-center justify-center text-gold"><span class="headline-serif font-bold text-2xl">Á</span></div><div><span class="headline-serif font-bold text-2xl tracking-[.12em]">ÁJÉ</span><span class="block text-[9px] tracking-[.3em] text-gold/80 font-semibold mt-0.5">MODERN NIGERIAN KITCHEN</span></div></div>
+        <p class="text-cream/45 text-sm font-light mt-5 leading-relaxed">Nigerian soul food, reimagined as luxury. Fire, flavour and finesse — served daily in the heart of Lagos.</p>
+        <div class="flex gap-3 mt-6">
+          <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-gold hover:text-ink transition"><i class="fa-brands fa-instagram text-sm"></i></a>
+          <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-gold hover:text-ink transition"><i class="fa-brands fa-tiktok text-sm"></i></a>
+          <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-gold hover:text-ink transition"><i class="fa-brands fa-x-twitter text-sm"></i></a>
+          <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-gold hover:text-ink transition"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+        </div>
+      </div>
+      <div>
+        <p class="text-[11px] tracking-[.35em] font-bold text-gold mb-6">EXPLORE</p>
+        <ul class="space-y-3 text-sm text-cream/60">
+          <li><a href="#" data-link="home" class="nav-go hover:text-gold transition">Home</a></li>
+          <li><a href="#" data-link="about" class="nav-go hover:text-gold transition">Our Story</a></li>
+          <li><a href="#" data-link="menu" class="nav-go hover:text-gold transition">Full Menu</a></li>
+          <li><a href="#" data-link="experience" class="nav-go hover:text-gold transition">The Experience</a></li>
+          <li><a href="#" data-link="pricing" class="nav-go hover:text-gold transition">Tasting Experiences</a></li>
+          <li><a href="#" data-link="gallery" class="nav-go hover:text-gold transition">Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-[11px] tracking-[.35em] font-bold text-gold mb-6">CRAVE THIS</p>
+        <ul class="space-y-3 text-sm text-cream/60">
+          <li><a href="#" data-link="menu" class="nav-go hover:text-gold transition">Smoky Party Jollof — ₦7,500</a></li>
+          <li><a href="#" data-link="menu" class="nav-go hover:text-gold transition">Peppered Snail — ₦14,500</a></li>
+          <li><a href="#" data-link="menu" class="nav-go hover:text-gold transition">Ember Suya Board — ₦12,800</a></li>
+          <li><a href="#" data-link="menu" class="nav-go hover:text-gold transition">Ofada & Ayamase — ₦8,900</a></li>
+          <li><a href="#" data-link="menu" class="nav-go hover:text-gold transition">Nkwobi Royale — ₦11,000</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-[11px] tracking-[.35em] font-bold text-gold mb-6">FIND US</p>
+        <ul class="space-y-3 text-sm text-cream/60 font-light">
+          <li class="flex gap-3"><i class="fa-solid fa-location-dot text-gold mt-0.5"></i> 14 Admiralty Way, Lekki Phase 1, Lagos</li>
+          <li class="flex gap-3"><i class="fa-solid fa-clock text-gold mt-0.5"></i> Daily: 9:00am – 11:00pm</li>
+          <li class="flex gap-3"><i class="fa-solid fa-phone text-gold mt-0.5"></i> +234 801 234 5678</li>
+        </ul>
+        <a href="https://wa.me/2348012345678?text=Hello%20%C3%81J%C3%89!" target="_blank" class="mt-6 inline-flex items-center gap-2 bg-[#25D366]/15 border border-[#25D366]/40 text-[#4be07f] font-bold text-xs tracking-widest px-6 py-3.5 rounded-full hover:bg-[#25D366] hover:text-ink transition"><i class="fa-brands fa-whatsapp text-base"></i> CHAT ON WHATSAPP</a>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 text-xs text-cream/35 tracking-wider">
+      <p>© 2026 ÁJÉ Modern Nigerian Kitchen. All rights reserved. Crafted with fire in Lagos.</p>
+      <p class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse inline-block"></span> KITCHEN OPEN NOW — DELIVERING IN 25 MIN</p>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING ACTIONS -->
+<div id="fabWrap" class="fixed bottom-6 right-6 z-[110] flex flex-col items-end gap-3">
+  <div class="relative fab-opt bg-ink border border-gold/40 text-gold" style="transition-delay:.15s" onclick="goPage('contact')" title="Send Message"><span class="fab-label">Send Message</span><i class="fa-solid fa-envelope"></i></div>
+  <div class="relative fab-opt bg-[#25D366] text-white" style="transition-delay:.1s" onclick="window.open('https://wa.me/2348012345678?text=Hello%20%C3%81J%C3%89!','_blank')" title="WhatsApp"><span class="fab-label">WhatsApp Us</span><i class="fa-brands fa-whatsapp"></i></div>
+  <div class="relative fab-opt bg-cream text-ink" style="transition-delay:.05s" onclick="window.location.href='tel:+2348012345678'" title="Call"><span class="fab-label">Call Now</span><i class="fa-solid fa-phone"></i></div>
+  <div class="relative fab-opt bg-gold text-ink" onclick="openCart()" title="Order"><span class="fab-label">Order Food</span><i class="fa-solid fa-bag-shopping"></i></div>
+  <div id="fabMain" onclick="document.getElementById('fabWrap').classList.toggle('open')"><i class="fa-solid fa-plus"></i></div>
+</div>
+
+<!-- CART -->
+<div id="overlay" onclick="closeCart();closeModal('reserveModal');closeModal('checkoutModal')"></div>
+<aside id="cartDrawer">
+  <div class="flex items-center justify-between p-6 border-b border-white/10">
+    <div><p class="text-[10px] tracking-[.35em] text-gold font-bold">YOUR ORDER</p><h3 class="headline-serif text-2xl font-bold">The Craving Bag</h3></div>
+    <button onclick="closeCart()" class="w-10 h-10 rounded-full border border-white/15 hover:border-gold hover:text-gold transition"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div id="cartItems" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
+  <div class="p-6 border-t border-white/10 bg-black/30">
+    <div class="flex justify-between text-sm text-cream/60 mb-2"><span>Subtotal</span><span id="cartSub">₦0</span></div>
+    <div class="flex justify-between text-sm text-cream/60 mb-4"><span>Delivery (Lekki/VI)</span><span>₦1,500</span></div>
+    <div class="flex justify-between items-center mb-5"><span class="font-bold tracking-widest text-sm">TOTAL</span><span id="cartTotal" class="headline-serif text-3xl font-bold text-gold">₦0</span></div>
+    <button onclick="openCheckout()" class="btn-gold w-full !py-4">Checkout <i class="fa-solid fa-arrow-right text-xs"></i></button>
+    <button onclick="orderViaWhatsApp()" class="w-full mt-3 flex items-center justify-center gap-2 border border-[#25D366]/40 text-[#4be07f] rounded-full py-3.5 text-xs font-extrabold tracking-[.2em] hover:bg-[#25D366] hover:text-ink transition"><i class="fa-brands fa-whatsapp text-base"></i> ORDER VIA WHATSAPP</button>
+  </div>
+</aside>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal" id="checkoutModal">
+  <div class="modal-box">
+    <div class="flex items-start justify-between mb-2"><div><p class="text-[10px] tracking-[.35em] text-gold font-bold">ALMOST THERE</p><h3 class="headline-serif text-3xl font-bold mt-1">Where is it going?</h3></div><button onclick="closeModal('checkoutModal')" class="w-10 h-10 rounded-full border border-white/15 hover:border-gold hover:text-gold transition shrink-0"><i class="fa-solid fa-xmark"></i></button></div>
+    <form onsubmit="placeOrder(event)" class="mt-6 space-y-4">
+      <input id="coName" required placeholder="Full name *" class="lux-input"/>
+      <input id="coPhone" required type="tel" placeholder="Phone number *" class="lux-input"/>
+      <input id="coAddr" required placeholder="Delivery address *" class="lux-input"/>
+      <select id="coPay" class="lux-input"><option>Pay on Delivery (Cash / Transfer)</option><option>Pay Now (Card / Transfer)</option><option>WhatsApp Me First</option></select>
+      <textarea id="coNote" rows="2" placeholder="Anything we should know? (pepper level, gate code...)" class="lux-input resize-none"></textarea>
+      <div class="bg-gold/10 border border-gold/30 rounded-2xl p-4 flex justify-between items-center"><span class="text-sm font-bold">Total + Delivery</span><span id="coTotal" class="headline-serif text-2xl font-bold text-gold">₦0</span></div>
+      <button class="btn-gold w-full !py-4">Confirm Order <i class="fa-solid fa-fire text-xs"></i></button>
+    </form>
+  </div>
+</div>
+
+<!-- RESERVE MODAL -->
+<div class="modal" id="reserveModal">
+  <div class="modal-box">
+    <div class="flex items-start justify-between mb-2"><div><p class="text-[10px] tracking-[.35em] text-gold font-bold">RESERVATION</p><h3 class="headline-serif text-3xl font-bold mt-1">Book your moment.</h3></div><button onclick="closeModal('reserveModal')" class="w-10 h-10 rounded-full border border-white/15 hover:border-gold hover:text-gold transition shrink-0"><i class="fa-solid fa-xmark"></i></button></div>
+    <form onsubmit="submitReserve(event)" class="mt-6 space-y-4">
+      <div class="grid grid-cols-2 gap-4"><input id="rName" required placeholder="Name *" class="lux-input"/><input id="rPhone" required type="tel" placeholder="Phone *" class="lux-input"/></div>
+      <div class="grid grid-cols-2 gap-4"><input id="rDate" required type="date" class="lux-input"/><select id="rTime" class="lux-input"><option>12:00 PM</option><option>2:00 PM</option><option>4:00 PM</option><option>6:00 PM</option><option selected>7:30 PM</option><option>9:00 PM</option></select></div>
+      <select id="rGuests" class="lux-input"><option>2 Guests</option><option>3 Guests</option><option>4 Guests</option><option>6 Guests</option><option>8 Guests (Ember Room)</option><option>10+ (Event)</option></select>
+      <button class="btn-gold w-full !py-4">Confirm Reservation</button>
+      <p class="text-center text-xs text-cream/40">Or call <a href="tel:+2348012345678" class="text-gold font-bold">+234 801 234 5678</a> for instant booking</p>
+    </form>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal" id="successModal">
+  <div class="modal-box text-center">
+    <div class="w-20 h-20 rounded-full bg-gold/15 border border-gold/40 flex items-center justify-center mx-auto"><i class="fa-solid fa-check text-3xl text-gold"></i></div>
+    <h3 class="headline-serif text-3xl font-bold mt-6" id="successTitle">Order received!</h3>
+    <p class="text-cream/55 font-light mt-3" id="successMsg">The fire is lit. Your food arrives hot in ~25 minutes.</p>
+    <p class="font-cormorant italic text-xl text-gold mt-4">“Good things come to those who order.”</p>
+    <button onclick="closeModal('successModal')" class="btn-gold mt-8 w-full">Beautiful. Thank You</button>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="this.classList.remove('show')">
+  <button class="absolute top-6 right-6 w-12 h-12 rounded-full border border-white/25 text-white hover:border-gold hover:text-gold transition"><i class="fa-solid fa-xmark"></i></button>
+  <img id="lightboxImg" src="" alt="Gallery"/>
+</div>
+
+<div id="toastWrap"></div>
+
+<script>
+/* ============ DATA ============ */
+const CATS = ["Breakfast","Main Dishes","Specialties","Sides","Drinks","Desserts"];
+const MENU = [
+ {id:1, cat:"Breakfast", name:"Akara & Pap Royale", desc:"Golden bean cakes, smoked pap, honey drizzle.", price:4500, img:"https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=700&auto=format&fit=crop", tag:"Morning Classic"},
+ {id:2, cat:"Breakfast", name:"Yam & Egg Sauce", desc:"Roasted yam, rich egg-tomato sauce, spring onion.", price:5200, img:"https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?q=80&w=700&auto=format&fit=crop", tag:"Comfort"},
+ {id:3, cat:"Breakfast", name:"Moi-Moi Deluxe", desc:"Steamed bean pudding, egg, smoked mackerel, sauce.", price:4800, img:"https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?q=80&w=700&auto=format&fit=crop", tag:"Chef's Touch"},
+ {id:4, cat:"Breakfast", name:"Ewa Agoyin & Agege", desc:"Silky honey beans, fiery agoyin sauce, soft bread.", price:4200, img:"https://images.unsplash.com/photo-1484723091739-30a097e8f929?q=80&w=700&auto=format&fit=crop", tag:"Street Luxe"},
+ {id:5, cat:"Main Dishes", name:"Smoky Party Jollof", desc:"Firewood-smoked, charred pepper, fried plantain, chicken.", price:7500, img:"https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=700&auto=format&fit=crop", tag:"Bestseller", sig:true},
+ {id:6, cat:"Main Dishes", name:"Egusi & Pounded Yam", desc:"Rich melon-seed soup, assorted meat, fresh pounded yam.", price:9800, img:"https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=700&auto=format&fit=crop", tag:"Heritage", sig:true},
+ {id:7, cat:"Main Dishes", name:"Ofada & Ayamase", desc:"Local ofada rice, 6-hour green pepper stew, assorted.", price:8900, img:"https://images.unsplash.com/photo-1563379926898-05f4575a45d8?q=80&w=700&auto=format&fit=crop", tag:"Cult Favourite"},
+ {id:8, cat:"Main Dishes", name:"Oha & Akpu", desc:"Eastern oha leaves, cocoyam-thickened, soft akpu.", price:9200, img:"https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=700&auto=format&fit=crop", tag:"Eastern Soul"},
+ {id:9, cat:"Main Dishes", name:"Banga & Starch", desc:"Palm-fruit banga, fresh catfish, silky yellow starch.", price:9500, img:"https://images.unsplash.com/photo-1603105037880-880cd4edfb0d?q=80&w=700&auto=format&fit=crop", tag:"Delta Gold"},
+ {id:10, cat:"Specialties", name:"Peppered Snail Platter", desc:"12 jumbo snails, charred pepper glaze, grilled onions.", price:14500, img:"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=700&auto=format&fit=crop", tag:"Legendary", sig:true},
+ {id:11, cat:"Specialties", name:"Nkwobi Royale", desc:"Cow foot in spicy palm sauce, ugba, garden eggs.", price:11000, img:"https://images.unsplash.com/photo-1529042410759-befb1204b468?q=80&w=700&auto=format&fit=crop", tag:"Palm Bar"},
+ {id:12, cat:"Specialties", name:"Ember Suya Board", desc:"Flame-grilled fillet, yaji dust, charred tomato & onion.", price:12800, img:"https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=700&auto=format&fit=crop", tag:"Live Fire", sig:true},
+ {id:13, cat:"Specialties", name:"Grilled Croaker & Dodo", desc:"Whole croaker, pepper butter, caramelised plantain.", price:13500, img:"https://images.unsplash.com/photo-1559847844-5315695dadae?q=80&w=700&auto=format&fit=crop", tag:"Ocean Fire", sig:true},
+ {id:14, cat:"Sides", name:"Dodo Gourmet", desc:"Twice-fried plantain, honey-chilli glaze, sea salt.", price:3500, img:"https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?q=80&w=700&auto=format&fit=crop", tag:"Golden"},
+ {id:15, cat:"Sides", name:"Asun Bites", desc:"Smoked goat meat, scotch bonnet, charred peppers.", price:6800, img:"https://images.unsplash.com/photo-1603360946369-dc9bb6258143?q=80&w=700&auto=format&fit=crop", tag:"Fiery"},
+ {id:16, cat:"Sides", name:"Small Chops Box", desc:"Puff-puff, samosa, spring rolls, chicken, pepper sauce.", price:5500, img:"https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=700&auto=format&fit=crop", tag:"Party Box"},
+ {id:17, cat:"Drinks", name:"Chapman Royale", desc:"Cucumber, grenadine, bitters, smoked citrus, lots of ice.", price:3800, img:"https://images.unsplash.com/photo-1551538827-9c037cb4f32a?q=80&w=700&auto=format&fit=crop", tag:"Iconic"},
+ {id:18, cat:"Drinks", name:"Zobo Infused", desc:"Hibiscus, ginger, pineapple, cloves — house-brewed.", price:3200, img:"https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=700&auto=format&fit=crop", tag:"House Brew"},
+ {id:19, cat:"Drinks", name:"Tigernut Cream", desc:"Kunun aya, coconut, dates — silky, chilled, addictive.", price:3900, img:"https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=700&auto=format&fit=crop", tag:"Silky"},
+ {id:20, cat:"Drinks", name:"Palm Wine Spritz", desc:"Fresh palm wine, passionfruit, mint, sparkling lift.", price:4500, img:"https://images.unsplash.com/photo-1551538827-9c037cb4f32a?q=80&w=700&auto=format&fit=crop", tag:"Fresh Tap"},
+ {id:21, cat:"Desserts", name:"Puff-Puff & Chocolate", desc:"Warm puff-puff, dark chocolate fondue, suya-sugar dust.", price:3800, img:"https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=700&auto=format&fit=crop", tag:"Sweet Heat", sig:true},
+ {id:22, cat:"Desserts", name:"Coconut Agege Pudding", desc:"Agege bread pudding, coconut custard, caramel.", price:4200, img:"https://images.unsplash.com/photo-1563805042-7684c019e1cb?q=80&w=700&auto=format&fit=crop", tag:"Comfort Sweet"},
+];
+const TESTIS = [
+ {q:"The peppered snail made our whole table go silent. Then everyone started ordering a second plate. Unreal.", n:"Adaeze O.", r:"Lekki • Signature Dinner", s:5},
+ {q:"I have eaten jollof in 6 countries. Nothing — NOTHING — touches ÁJÉ's party jollof. Smoky, perfect, addictive.", n:"Tunde B.", r:"Victoria Island • Regular", s:5},
+ {q:"Booked the Ember Room for my wife's birthday. She cried. The chef came out, the suya was still sizzling. 10/10.", n:"Chidi E.", r:"Ikoyi • Ember Room", s:5},
+ {q:"Delivery in 22 minutes, still steaming, plated like fine dining. My ofada arrived looking like art.", n:"Funmi A.", r:"Lekki • Delivery", s:5},
+ {q:"Took my American colleagues here. They now plan trips around ÁJÉ. This place is a national treasure.", n:"Sarah M.", r:"Abuja • Visiting Lagos", s:5},
+];
+const GALLERY = [
+ {src:"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800&auto=format&fit=crop", cat:"food", t:"Ember Suya"},
+ {src:"https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800&auto=format&fit=crop", cat:"people", t:"Joy Around the Table"},
+ {src:"https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=800&auto=format&fit=crop", cat:"kitchen", t:"The Morning Fire"},
+ {src:"https://images.unsplash.com/photo-1598866594230-a7c12756260f?q=80&w=800&auto=format&fit=crop", cat:"ingredients", t:"Scotch Bonnet, Fresh"},
+ {src:"https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop", cat:"food", t:"Char & Smoke"},
+ {src:"https://images.unsplash.com/photo-1543007630-9710e4a00a20?q=80&w=800&auto=format&fit=crop", cat:"people", t:"First Bite Face"},
+ {src:"https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=800&auto=format&fit=crop", cat:"kitchen", t:"Chef at Work"},
+ {src:"https://images.unsplash.com/photo-1574484284002-952d92456975?q=80&w=800&auto=format&fit=crop", cat:"ingredients", t:"Spice Library"},
+ {src:"https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=800&auto=format&fit=crop", cat:"food", t:"Party Jollof"},
+ {src:"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=800&auto=format&fit=crop", cat:"people", t:"Candlelit Nights"},
+ {src:"https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?q=80&w=800&auto=format&fit=crop", cat:"kitchen", t:"Plating Ritual"},
+ {src:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop", cat:"food", t:"Fresh & Bright"},
+];
+
+/* ============ HELPERS ============ */
+const fmt = n => "₦" + n.toLocaleString("en-NG");
+function showToast(msg, icon="fa-check"){
+  const w = document.getElementById("toastWrap");
+  const t = document.createElement("div");
+  t.className = "toast";
+  t.innerHTML = `<i class="fa-solid ${icon} text-gold"></i> ${msg}`;
+  w.appendChild(t);
+  setTimeout(()=>{ t.style.opacity="0"; t.style.transform="translateY(10px)"; setTimeout(()=>t.remove(),400); }, 2800);
+}
+function openLightbox(src){ document.getElementById("lightboxImg").src = src; document.getElementById("lightbox").classList.add("show"); }
+
+/* ============ ROUTER ============ */
+function goPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("page-"+id).classList.add("active");
+  document.querySelectorAll(".nav-link").forEach(a=>a.classList.toggle("active", a.dataset.link===id));
+  document.querySelectorAll(".m-link").forEach(a=>a.classList.toggle("active", a.dataset.link===id));
+  document.getElementById("mobileMenu").classList.remove("open");
+  document.getElementById("burger").classList.remove("open");
+  window.scrollTo({top:0, behavior:"instant"});
+  requestAnimationFrame(()=>{ observeReveals(); window.dispatchEvent(new Event("scroll")); });
+}
+document.querySelectorAll(".nav-go").forEach(a=>a.addEventListener("click", e=>{ e.preventDefault(); goPage(a.dataset.link); }));
+function toggleMobile(){
+  document.getElementById("mobileMenu").classList.toggle("open");
+  document.getElementById("burger").classList.toggle("open");
+}
+
+/* ============ MENU RENDER ============ */
+let homeFilter = "Main Dishes", fullFilter = "all";
+function dishCard(m, delay=0){
+  return `<div class="dish-card" data-reveal style="transition-delay:${delay}ms">
+    <div class="img-wrap h-60 relative">
+      <img src="${m.img}" loading="lazy" class="w-full h-full object-cover" alt="${m.name}"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+      <span class="absolute top-4 left-4 text-[10px] font-extrabold tracking-[.2em] bg-gold text-ink px-3.5 py-1.5 rounded-full">${m.tag.toUpperCase()}</span>
+      <span class="absolute bottom-4 left-4 price-badge text-sm px-4 py-2 rounded-full">${fmt(m.price)}</span>
+    </div>
+    <div class="p-6">
+      <p class="text-[10px] tracking-[.3em] text-gold/80 font-bold">${m.cat.toUpperCase()}</p>
+      <h3 class="headline-serif text-xl font-bold mt-1.5">${m.name}</h3>
+      <p class="text-cream/50 text-sm font-light mt-2 leading-relaxed min-h-[42px]">${m.desc}</p>
+      <div class="flex items-center gap-3 mt-5">
+        <button onclick="addToCart(${m.id})" class="btn-dark flex-1 justify-center">Order <i class="fa-solid fa-plus text-[11px]"></i></button>
+        <button onclick="quickView(${m.id})" class="w-[46px] h-[46px] rounded-full border border-white/15 hover:border-gold hover:text-gold transition shrink-0"><i class="fa-solid fa-eye text-sm"></i></button>
+      </div>
+    </div></div>`;
+}
+function renderSignature(){
+  document.getElementById("signatureGrid").innerHTML = MENU.filter(m=>m.sig).map((m,i)=>dishCard(m,i*80)).join("");
+}
+function renderHomeTabs(){
+  document.getElementById("homeTabs").innerHTML = CATS.map(c=>`<button class="tab-btn ${c===homeFilter?'active':''}" onclick="setHomeFilter('${c}')">${c}</button>`).join("");
+}
+function setHomeFilter(c){ homeFilter=c; renderHomeTabs(); renderFeatured(); }
+function renderFeatured(){
+  const items = MENU.filter(m=>m.cat===homeFilter).slice(0,4);
+  const g = document.getElementById("featuredGrid");
+  g.style.opacity="0"; g.style.transform="translateY(14px)";
+  setTimeout(()=>{ g.innerHTML = items.map((m,i)=>dishCard(m,i*70)).join(""); observeReveals(); g.style.transition="all .5s ease"; g.style.opacity="1"; g.style.transform="translateY(0)"; },220);
+}
+function renderFullTabs(){
+  const all = ["all",...CATS];
+  document.getElementById("fullTabs").innerHTML = all.map(c=>`<button class="tab-btn ${c===fullFilter?'active':''}" onclick="setFullFilter('${c}')">${c==='all'?'All Dishes':c}</button>`).join("");
+}
+function setFullFilter(c){ fullFilter=c; renderFullTabs(); renderFullMenu(); }
+function renderFullMenu(){
+  const q = (document.getElementById("menuSearch")?.value||"").toLowerCase();
+  let items = MENU.filter(m => (fullFilter==="all"||m.cat===fullFilter) && (m.name.toLowerCase().includes(q)||m.desc.toLowerCase().includes(q)||m.cat.toLowerCase().includes(q)));
+  document.getElementById("menuCount").textContent = items.length ? `SHOWING ${items.length} DISH${items.length>1?"ES":""} — MADE FRESH TO ORDER` : "NO MATCH — TRY 'JOLLOF' OR 'SNAIL'";
+  document.getElementById("fullMenuGrid").innerHTML = items.length ? items.map((m,i)=>dishCard(m,(i%4)*60)).join("") : `<div class="col-span-full text-center py-20"><p class="headline-serif italic text-3xl text-cream/40">Hmm... even our chefs can't find that one.</p><button onclick="document.getElementById('menuSearch').value='';setFullFilter('all')" class="btn-outline mt-6">Show Everything</button></div>`;
+  observeReveals();
+}
+function quickView(id){
+  const m = MENU.find(x=>x.id===id);
+  document.getElementById("lightboxImg").src = m.img;
+  document.getElementById("lightbox").classList.add("show");
+  showToast(`${m.name} — ${fmt(m.price)}`, "fa-utensils");
+}
+
+/* ============ CART ============ */
+let cart = {};
+function addToCart(id){
+  cart[id] = (cart[id]||0)+1;
+  updateCartUI();
+  const m = MENU.find(x=>x.id===id);
+  showToast(`${m.name} added to bag`, "fa-bag-shopping");
+  const b = document.getElementById("cartCount");
+  b.classList.remove("badge-pulse"); void b.offsetWidth; b.classList.add("badge-pulse");
+}
+function changeQty(id,d){ cart[id]=(cart[id]||0)+d; if(cart[id]<=0) delete cart[id]; updateCartUI(); }
+function cartSubtotal(){ return Object.entries(cart).reduce((s,[id,q])=> s + MENU.find(m=>m.id==id).price*q, 0); }
+function updateCartUI(){
+  const count = Object.values(cart).reduce((a,b)=>a+b,0);
+  document.getElementById("cartCount").textContent = count;
+  const wrap = document.getElementById("cartItems");
+  if(!count){ wrap.innerHTML = `<div class="text-center py-16"><div class="w-20 h-20 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-2xl text-cream/30"><i class="fa-solid fa-bag-shopping"></i></div><p class="headline-serif italic text-2xl text-cream/50 mt-6">Your bag is empty... for now.</p><p class="text-sm text-cream/35 mt-2 font-light">Hunger is a terrible thing to waste.</p><button onclick="closeCart();goPage('menu')" class="btn-gold mt-6 !py-3">Browse Menu</button></div>`; }
+  else{
+    wrap.innerHTML = Object.entries(cart).map(([id,q])=>{
+      const m = MENU.find(x=>x.id==id);
+      return `<div class="flex gap-4 bg-white/[.03] border border-white/10 rounded-2xl p-3.5">
+        <img src="${m.img}" class="w-20 h-20 rounded-xl object-cover shrink-0" alt=""/>
+        <div class="flex-1 min-w-0"><p class="font-bold text-sm truncate">${m.name}</p><p class="text-gold font-bold text-sm mt-0.5">${fmt(m.price)}</p>
+        <div class="flex items-center gap-3 mt-2"><button onclick="changeQty(${id},-1)" class="w-8 h-8 rounded-full border border-white/15 hover:border-gold hover:text-gold transition text-sm">−</button><span class="font-bold text-sm w-5 text-center">${q}</span><button onclick="changeQty(${id},1)" class="w-8 h-8 rounded-full border border-white/15 hover:border-gold hover:text-gold transition text-sm">+</button></div></div>
+        <button onclick="changeQty(${id},-99)" class="text-cream/30 hover:text-red-400 transition self-start p-1"><i class="fa-solid fa-trash-can text-sm"></i></button></div>`;
+    }).join("");
+  }
+  const sub = cartSubtotal();
+  document.getElementById("cartSub").textContent = fmt(sub);
+  document.getElementById("cartTotal").textContent = fmt(sub + (count?1500:0));
+  document.getElementById("coTotal").textContent = fmt(sub + (count?1500:0));
+}
+function openCart(){ updateCartUI(); document.getElementById("cartDrawer").classList.add("open"); document.getElementById("overlay").classList.add("show"); }
+function closeCart(){ document.getElementById("cartDrawer").classList.remove("open"); document.getElementById("overlay").classList.remove("show"); }
+function openCheckout(){
+  if(!Object.keys(cart).length){ showToast("Your bag is empty — add something delicious first", "fa-circle-exclamation"); return; }
+  closeCart(); document.getElementById("checkoutModal").classList.add("show"); document.getElementById("overlay").classList.add("show");
+}
+function closeModal(id){ document.getElementById(id).classList.remove("show"); document.getElementById("overlay").classList.remove("show"); }
+function placeOrder(e){
+  e.preventDefault();
+  const name = document.getElementById("coName").value;
+  closeModal("checkoutModal");
+  document.getElementById("successTitle").textContent = `Thank you, ${name.split(" ")[0]}!`;
+  document.getElementById("successMsg").textContent = `Order confirmed. Hot and fresh at your door in ~25 minutes. Total: ${document.getElementById("coTotal").textContent}`;
+  document.getElementById("successModal").classList.add("show");
+  cart = {}; updateCartUI();
+}
+function orderViaWhatsApp(){
+  if(!Object.keys(cart).length){ showToast("Add dishes first, then order via WhatsApp","fa-circle-exclamation"); return; }
+  const lines = Object.entries(cart).map(([id,q])=>{ const m=MENU.find(x=>x.id==id); return `• ${q}x ${m.name} — ${fmt(m.price*q)}`; });
+  const msg = encodeURIComponent(`Hello ÁJÉ! I'd like to order:\n\n${lines.join("\n")}\n\nTotal (excl. delivery): ${fmt(cartSubtotal())}\n\nName:\nAddress:`);
+  window.open(`https://wa.me/2348012345678?text=${msg}`,"_blank");
+}
+function bookExperience(name){
+  const msg = encodeURIComponent(`Hello ÁJÉ! I'd like to book: ${name}.\n\nName:\nDate:\nGuests:`);
+  window.open(`https://wa.me/2348012345678?text=${msg}`,"_blank");
+  showToast(`${name} — continue on WhatsApp`, "fa-calendar-check");
+}
+function openReserve(){ document.getElementById("reserveModal").classList.add("show"); document.getElementById("overlay").classList.add("show"); }
+function submitReserve(e){
+  e.preventDefault(); closeModal("reserveModal");
+  document.getElementById("successTitle").textContent = "Table reserved!";
+  document.getElementById("successMsg").textContent = `${document.getElementById("rGuests").value} • ${document.getElementById("rDate").value} at ${document.getElementById("rTime").value}. We'll confirm by SMS shortly.`;
+  document.getElementById("successModal").classList.add("show");
+}
+function submitContact(e){
+  e.preventDefault(); e.target.reset();
+  document.getElementById("successTitle").textContent = "Message sent!";
+  document.getElementById("successMsg").textContent = "We reply within 1 hour (9am–11pm). The fire stays lit.";
+  document.getElementById("successModal").classList.add("show");
+}
+
+/* ============ TESTIMONIALS ============ */
+let tIdx = 0, tTimer;
+function renderTestis(){
+  document.getElementById("testiWrap").innerHTML = TESTIS.map((t,i)=>`
+    <div class="testi-slide ${i===0?'active':''} flex flex-col items-center justify-start px-2">
+      <div class="flex gap-1 text-gold mb-5">${"★".repeat(t.s)}</div>
+      <p class="font-cormorant italic text-2xl md:text-[2rem] leading-snug text-cream/90">“${t.q}”</p>
+      <p class="mt-6 font-bold tracking-widest text-sm">${t.n}</p>
+      <p class="text-[11px] tracking-[.3em] text-gold font-bold mt-1">${t.r.toUpperCase()}</p>
+    </div>`).join("");
+  document.getElementById("testiDots").innerHTML = TESTIS.map((_,i)=>`<div class="testi-dot ${i===0?'active':''}" onclick="goTesti(${i})"></div>`).join("");
+  clearInterval(tTimer); tTimer = setInterval(()=>moveTesti(1), 6000);
+}
+function goTesti(i){
+  tIdx = (i+TESTIS.length)%TESTIS.length;
+  document.querySelectorAll(".testi-slide").forEach((s,k)=>s.classList.toggle("active",k===tIdx));
+  document.querySelectorAll("#testiDots .testi-dot").forEach((d,k)=>d.classList.toggle("active",k===tIdx));
+}
+function moveTesti(d){ goTesti(tIdx+d); clearInterval(tTimer); tTimer=setInterval(()=>moveTesti(1),6000); }
+
+/* ============ GALLERY ============ */
+let galFilter="all";
+function setGalFilter(f,btn){ galFilter=f; document.querySelectorAll("#galTabs .tab-btn").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); renderGallery(); }
+function renderGallery(){
+  const items = GALLERY.filter(g=>galFilter==="all"||g.cat===galFilter);
+  document.getElementById("galleryGrid").innerHTML = items.map((g,i)=>`
+    <div class="g-item break-inside-avoid" data-reveal onclick="openLightbox('${g.src}')">
+      <img src="${g.src}" loading="lazy" class="w-full object-cover" style="height:${[320,420,280,380][i%4]}px" alt="${g.t}"/>
+      <div class="g-overlay"><div><p class="text-[10px] tracking-[.3em] text-gold font-bold">${g.cat.toUpperCase()}</p><p class="headline-serif italic text-xl">${g.t}</p></div></div>
+    </div>`).join("");
+  observeReveals();
+}
+
+/* ============ EXPERIENCE SLIDER ============ */
+const XP = [
+ {k:"ACT I — THE FIRE", t:`Dinner is not dinner.<br/><span class="italic text-gold">It’s theatre.</span>`, d:"Charcoal crackles. Peppers hit hot oil. The whole room turns to look. This is the ÁJÉ experience."},
+ {k:"ACT II — THE CRAFT", t:`Six hours of patience.<br/><span class="italic text-gold">One minute of silence.</span>`, d:"Our ayamase simmers low and slow until it surrenders. Your first bite will do the same."},
+ {k:"ACT III — THE SURRENDER", t:`Eyes close.<br/><span class="italic text-gold">Conversation stops.</span>`, d:"That moment when flavour takes over and the world fades out. We live for that face."},
+ {k:"ACT IV — THE ROOM", t:`Candlelight. Brass.<br/><span class="italic text-gold">Your people.</span>`, d:"The Ember Room seats eight. Seven courses. Zero distractions. Lagos' most intimate dinner."},
+];
+let xpIdx=0, xpTimer;
+function xpGo(i){
+  xpIdx=(i+XP.length)%XP.length;
+  document.querySelectorAll(".xp-slide").forEach((s,k)=>s.classList.toggle("active",k===xpIdx));
+  document.getElementById("xpKicker").textContent=XP[xpIdx].k;
+  document.getElementById("xpTitle").innerHTML=XP[xpIdx].t;
+  document.getElementById("xpDesc").textContent=XP[xpIdx].d;
+  document.getElementById("xpBar").style.width=((xpIdx+1)/XP.length*100)+"%";
+  document.getElementById("xpCount").textContent=String(xpIdx+1).padStart(2,"0")+" / 04";
+}
+function xpNext(){ xpGo(xpIdx+1); resetXp(); }
+function xpPrev(){ xpGo(xpIdx-1); resetXp(); }
+function resetXp(){ clearInterval(xpTimer); xpTimer=setInterval(()=>xpGo(xpIdx+1),7000); }
+
+/* ============ PRICING BILLING ============ */
+function setBilling(mode){
+  const dine = mode==="dine";
+  document.getElementById("billDine").className = "px-7 py-2.5 rounded-full text-xs font-extrabold tracking-widest "+(dine?"bg-gold text-ink":"text-cream/60");
+  document.getElementById("billHome").className = "px-7 py-2.5 rounded-full text-xs font-extrabold tracking-widest "+(!dine?"bg-gold text-ink":"text-cream/60");
+  document.querySelectorAll(".p-val").forEach(el=>{ el.textContent = Number(dine?el.dataset.dine:el.dataset.home).toLocaleString(); });
+}
+
+/* ============ SCROLL SYSTEM ============ */
+let revealObs;
+function observeReveals(){
+  if(revealObs) revealObs.disconnect();
+  revealObs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); revealObs.unobserve(e.target); } });
+  },{threshold:.12, rootMargin:"0px 0px -40px 0px"});
+  document.querySelectorAll(".page.active [data-reveal]:not(.in), footer [data-reveal]:not(.in)").forEach(el=>revealObs.observe(el));
+}
+/* counters */
+const cntObs = new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting) return;
+  const el=e.target, target=+el.dataset.target; let cur=0; const step=Math.max(1,Math.ceil(target/40));
+  const iv=setInterval(()=>{ cur+=step; if(cur>=target){cur=target;clearInterval(iv);} el.textContent=cur; },40);
+  cntObs.unobserve(el);
+}),{threshold:.5});
+/* nav scroll + parallax + immersive steps */
+const EXP_TITLES=["The Arrival","The Close-Up","The Reach","The Lift","The First Bite","The Surrender","The Craving"];
+function initExpDots(){ document.getElementById("expDots").innerHTML = EXP_TITLES.map((_,i)=>`<div class="w-2 h-2 rounded-full transition-all ${i===0?'bg-gold scale-125':'bg-white/25'}" data-d="${i}"></div>`).join(""); }
+function setExp(i){
+  document.querySelectorAll(".exp-img").forEach((im,k)=>im.classList.toggle("active",k===i));
+  document.querySelectorAll(".exp-step").forEach((s,k)=>s.classList.toggle("active",k===i));
+  document.querySelectorAll("#expDots div").forEach((d,k)=>{ d.className = `w-2 h-2 rounded-full transition-all ${k===i?'bg-gold scale-125':'bg-white/25'}`; });
+  const k=document.getElementById("expKicker"), c=document.getElementById("expCaption");
+  if(k) k.textContent=`SCENE 0${i+1} / 07`; if(c) c.textContent=EXP_TITLES[i];
+}
+window.addEventListener("scroll", ()=>{
+  document.getElementById("nav").classList.toggle("scrolled", window.scrollY>40);
+  /* parallax */
+  document.querySelectorAll(".page.active [data-parallax]").forEach(el=>{
+    const r = el.getBoundingClientRect();
+    const prog = (window.innerHeight - r.top)/(window.innerHeight + r.height);
+    el.style.transform = `translateY(${(prog-.5)*60}px) scale(1.12)`;
+  });
+  /* immersive steps */
+  const steps=[...document.querySelectorAll("#page-home.active #expSteps .exp-step")];
+  if(steps.length){
+    let best=0, bestD=1e9;
+    steps.forEach((s,i)=>{ const r=s.getBoundingClientRect(); const d=Math.abs(r.top+r.height/2-window.innerHeight/2); if(d<bestD){bestD=d;best=i;} });
+    setExp(best);
+  }
+},{passive:true});
+
+/* cursor glow */
+document.addEventListener("mousemove", e=>{
+  const g=document.getElementById("cursorGlow");
+  g.style.left=e.clientX+"px"; g.style.top=e.clientY+"px";
+});
+
+/* particles */
+function initParticles(){
+  const w=document.getElementById("particles");
+  for(let i=0;i<22;i++){
+    const p=document.createElement("span");
+    p.className="float-particle";
+    const s=4+Math.random()*10;
+    p.style.cssText=`left:${Math.random()*100}%;bottom:-20px;width:${s}px;height:${s}px;animation-duration:${7+Math.random()*10}s;animation-delay:${Math.random()*8}s;`;
+    w.appendChild(p);
+  }
+}
+
+/* ============ INIT ============ */
+window.addEventListener("DOMContentLoaded", ()=>{
+  renderSignature(); renderHomeTabs(); renderFeatured();
+  renderFullTabs(); renderFullMenu(); renderTestis(); renderGallery();
+  initExpDots(); initParticles(); observeReveals(); updateCartUI(); resetXp();
+  document.querySelectorAll(".counter").forEach(el=>cntObs.observe(el));
+  /* preloader */
+  let p=0;
+  const iv=setInterval(()=>{
+    p+=Math.random()*14;
+    if(p>=100){p=100;clearInterval(iv); setTimeout(()=>{
+      document.getElementById("preloader").classList.add("done");
+      gsap.from('[data-hero]',{y:50,opacity:0,duration:1.1,stagger:.12,ease:"power3.out",delay:.15});
+    },350);}
+    document.getElementById("loaderBar").style.width=p+"%";
+    document.getElementById("loaderPct").textContent=Math.floor(p)+"%";
+  },90);
+  /* min date = today */
+  const d=document.getElementById("rDate"); if(d) d.min=new Date().toISOString().split("T")[0];
+});
+document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ closeCart(); document.querySelectorAll(".modal.show,#lightbox.show").forEach(m=>m.classList.remove("show")); document.getElementById("overlay").classList.remove("show"); }});
+</script>
+</body>
+</html>
